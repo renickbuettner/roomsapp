@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <title>Welcome!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="frontend/ui/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="frontend/ui/css/font-awesome.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="frontend/ui/css/animate.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="frontend/ui/css/app.css" crossorigin="anonymous">
+</head>
+<body style="background:rgba(52,52,52,0.82);"> <!-- das muss weg, via JS -->
+
+<!-- Login screen -->
+<section class="screen login" id="screen.login" data-style-body="background:rgba(52,52,52,0.82);">
+    <div class="container-fluid">
+        <small class="float-right text-light cr">
+            <span class="badge badge-warning text-white">beta</span>
+            &copy; Renick Büttner
+        </small><br>
+        <h1 class="text-center text-light">Raumverwaltung</h1>
+        <div class="row justify-content-sm-center">
+            <div class="col col-sm-7 col-md-5 col-lg-4">
+                <div class="login-form animated zoomIn">
+                    <input type="text" class="form-control form-control-lg input-user" placeholder="Benutzer" aria-label="Benutzer">
+                    <div class="input-group input-group-lg">
+                        <input type="password" class="form-control input-pwd" placeholder="Passwort" aria-label="Passwort">
+                        <span class="input-group-btn">
+                        <button class="btn btn-secondary" type="button" onclick="App.loadScreen('screen.dashboard')">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- App -->
+<section class="screen dashboard" id="screen.dashboard">
+    <div class="row">
+        <div class="col-lg-4 bg-light animated slideInLeft">
+            <div class="align-items-center">
+                <div class="topnav text-center">
+                    <div class="btn-group btn-group-lg" role="group">
+                        <button type="button" class="btn btn-outline-dark" disabled>Fr. Schwarz</button>
+                        <button type="button" class="btn btn-danger" onclick="App.loadScreen('screen.login')">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#rooms">
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            Räume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#users">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            Benutzer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="#clients">
+                            <i class="fa fa-desktop" aria-hidden="true"></i>
+                            Clients</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col bg-dark animated slideInRight">
+
+            <!-- Room -->
+            <div class="viewport" id="viewport">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="screen">
+    <div id="template.room">
+        <a href="#$room" class="room p-3">
+            <div class="card bg-secondary" style="width: 20rem;">
+                <div class="card-header text-white">
+                    <span>$room</span>
+                </div>
+                <ul class="list-group list-group-flush text-dark">
+                    <li class="list-group-item">$building</li>
+                    <li class="list-group-item">$currentState</li>
+                </ul>
+            </div>
+        </a>
+    </div>
+    <div id="template.roomContainer">
+        <div class="d-flex flex-wrap">
+            $rooms
+        </div>
+    </div>
+    <div id="template.usermg">
+        <div class="d-flex flex-wrap">
+            $users
+        </div>
+    </div>
+    <div id="template.user">
+        <a href="#room123" class="room p-3">
+            <div class="card bg-secondary" style="width: 20rem;">
+                <div class="card-header text-white">
+                    <span>$room</span>
+                </div>
+                <ul class="list-group list-group-flush text-dark">
+                    <li class="list-group-item">$building</li>
+                    <li class="list-group-item">$currentState</li>
+                </ul>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="frontend/ui/js/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="frontend/ui/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="frontend/ui/js/app.js" crossorigin="anonymous"></script>
+</body>
+</html>
