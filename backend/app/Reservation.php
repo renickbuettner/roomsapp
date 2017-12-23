@@ -14,8 +14,15 @@ class Reservation
 
     public $Time, $Person, $Uuid;
 
-    public function createReservation()
-    {
+    public function getReservation($f3){
+
+    }
+
+    public function updateReservation($f3){
+
+    }
+
+    public function deleteReservation($f3){
 
     }
 

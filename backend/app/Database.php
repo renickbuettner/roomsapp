@@ -16,7 +16,7 @@ class Database
 
     public function __construct()
     {
-        $this->data = new \PDO('sqlite:'.$this->path);
+        $this->data = new \DB\SQL('sqlite:' . $this->path);
     }
 
     public static function getInstance()

@@ -12,6 +12,7 @@ date_default_timezone_set('Europe/Berlin');
 
 class App
 {
+    const VERSION = "1.0";
 
     private $rm, $db, $api;
 
