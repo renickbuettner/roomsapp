@@ -15,6 +15,14 @@ class Api
     public function handleRequest($req)
     {
 
+        try {
+
+            $i = 1;
+
+        } catch (\Exception $e) {
+
+        }
+
     }
 
 }

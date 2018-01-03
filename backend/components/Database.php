@@ -27,4 +27,9 @@ class Database
         );
     }
 
+    public function prepareDatabase() {
+
+        // do some commands for creating tables if not exists...
+    }
+
 }
