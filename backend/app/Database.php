@@ -12,7 +12,7 @@ namespace renickbuettner\App;
 class Database
 {
 
-    private $path = ".appData/app.db", $data;
+    private $path = ".appData/roomsapp.sqlite3", $data;
 
     public function __construct()
     {
