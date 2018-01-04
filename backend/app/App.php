@@ -16,16 +16,25 @@ class App
 
     private $rm, $db, $api;
 
-    public function __construct()
+    public function __construct($f3)
     {
-        $db  = new Database();
-        $rm  = new RoomManagement();
-        $api = new Api();
+        //$db  = new Database($f3);
+        //$api = new Api($f3);
+        $f3->set("Database", new Database($f3));
+        $f3->set("Api", new Api($f3));
     }
 
-    public function getDB()
-    {
-        return $this->db;
+    public static function hello() {
+        (new Response([
+            "RoomsApp" => [
+                "Version" => App::VERSION,
+                "Routes"  => [
+                    "/rooms",
+                    "/users",
+                    "/reservations"
+                ]
+            ]
+        ]))->send();
     }
 
 }

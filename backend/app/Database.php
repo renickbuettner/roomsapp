@@ -12,19 +12,27 @@ namespace renickbuettner\App;
 class Database
 {
 
-    private $path = ".appData/roomsapp.sqlite3", $data;
+    private $path = "../appData/roomsapp.sqlite3",
+            $db;
 
     public function __construct()
     {
-        $this->data = new \DB\SQL('sqlite:' . $this->path);
+        $this->db = new \DB\SQL('sqlite:' . $this->path);
     }
 
-    public static function getInstance()
+    public function getRooms($id)
     {
-        GLOBAL $App;
-        return (
-            $App->getDB()
-        );
+        try {
+            if($id != "*"){
+                return $this->db->exec(
+                    'SELECT * FROM rooms WHERE id=:id', ["id"=>$id]);
+            } else {
+                return $this->db->exec(
+                    'SELECT * FROM rooms');
+            }
+        } catch (\Exception $e){
+            return $e;
+        }
     }
 
 }
