@@ -20,21 +20,6 @@ class Database
         $this->db = new \DB\SQL('sqlite:' . $this->path);
     }
 
-    public function getRooms($id)
-    {
-        try {
-            if($id != "*"){
-                return $this->db->exec(
-                    "SELECT * FROM rooms WHERE id=:id", ["id"=>$id]);
-            } else {
-                return $this->db->exec(
-                    "SELECT * FROM rooms");
-            }
-        } catch (\Exception $e){
-            return null;
-        }
-    }
-
     public function getUsers($email)
     {
         try {
@@ -89,6 +74,21 @@ class Database
         } catch (\Exception $e){}
     }
 
+    public function getRooms($id)
+    {
+        try {
+            if($id != "*"){
+                return $this->db->exec(
+                    "SELECT * FROM rooms WHERE id=:id", ["id"=>$id]);
+            } else {
+                return $this->db->exec(
+                    "SELECT * FROM rooms");
+            }
+        } catch (\Exception $e){
+            return null;
+        }
+    }
+
     public function writeRoom(Room $room)
     {
         try {
@@ -125,8 +125,74 @@ class Database
         } catch (\Exception $e){}
     }
 
+    public function getReservation($id)
+    {
+        try {
+            if($id != "*"){
+                return $this->db->exec(
+                    "SELECT * FROM reservations WHERE id=:id", ["id"=>$id]);
+            } else {
+                return $this->db->exec(
+                    "SELECT * FROM reservations");
+            }
+        } catch (\Exception $e){
+            return null;
+        }
+    }
 
+    public function filterReservation($key, $val)
+    {
+        try {
+            return $this->db->exec(
+                "SELECT * FROM reservations WHERE :key=:val",
+                [
+                    "key"=>$key,
+                    "val"=>$val]);
+        } catch (\Exception $e){
+            return null;
+        }
+    }
 
+    public function writeReservation(Reservation $res)
+    {
+        try {
+            if($res->uuid == null)
+            {
+                $this->db->exec(
+                    "INSERT INTO reservations (`room`, `user`, `notes`, `begin`, `end`) VALUES (:room, :user, :notes, :begin, :end);",
+                    [
+                        ":room" => $res->room,
+                        ":user" => $res->user,
+                        ":notes" => $res->notes,
+                        ":begin" => $res->begin,
+                        ":end" => $res->end
+                    ]);
+                return $this->db->pdo()->lastInsertId();
+            } else {
+                $this->db->exec(
+                    "UPDATE reservations SET `room`=:room, `user`=:user, `notes`=:notes, `begin`=:begin, `end`=:end ".
+                    "WHERE `id`=:id;",
+                    [
+                        ":id" => $res->uuid,
+                        ":room" => $res->room,
+                        ":user" => $res->user,
+                        ":notes" => $res->notes,
+                        ":begin" => $res->begin,
+                        ":end" => $res->end
+                    ]);
+            }
+        } catch (\Exception $e){}
+    }
 
+    public function removeReservation(Reservation $res)
+    {
+        try {
+            $this->db->exec(
+                "DELETE FROM reservations WHERE `id`=:id;",
+                [
+                    ":id" => $res->uuid
+                ]);
+        } catch (\Exception $e){}
+    }
 
 }

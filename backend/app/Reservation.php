@@ -15,9 +15,11 @@ class Reservation
     public  $begin,
             $end,
             $user,
-            $uuid;
+            $uuid,
+            $room,
+            $notes;
 
-    public function __construct($begin, $end, $user, $uuid)
+    public function __construct($begin, $end, $user, $notes, $room, $uuid = null)
     {
         $this->begin = $begin;
         $this->end   = $end;
@@ -26,16 +28,32 @@ class Reservation
     }
 
     public function save($f3){
-
+        try {
+            $con  = $f3->get("Database");
+            $tmp = $con->writeReservation($this);
+            if($this->uuid == null)
+                $this->uuid = $tmp;
+            unset($tmp);
+        } catch (\Exception $e){}
     }
 
-    public function delete($f3){
-
+    public function remove($f3){
+        try {
+            $con = $f3->get("Database");
+            $con->removeReservation($this);
+        } catch (\Exception $e){}
     }
 
     public function toArray()
     {
-
+        return [
+            "uuid"  => $this->uuid,
+            "user"  => $this->user,
+            "room"  => $this->room,
+            "notes" => $this->notes,
+            "begin" => $this->begin,
+            "end"   => $this->end
+        ];
     }
 
 }
