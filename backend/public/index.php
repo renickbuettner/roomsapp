@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Kickstart the framework
 $f3=require('../lib/base.php');

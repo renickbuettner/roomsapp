@@ -34,9 +34,11 @@ class Api
         /**
          *  [ USER OPERATIONS ]
          */
-        //$f3->route('GET /users', 'renickbuettner\App\Users->getUsers');
-        //$f3->route('POST /users', 'renickbuettner\App\Users->addUser');
-
+        $f3->route('GET /users', 'renickbuettner\App\Users->getUsers');
+        $f3->route('POST /users', 'renickbuettner\App\Users->createUser');
+        $f3->route('GET /users/@ref', 'renickbuettner\App\Users->getUser');
+        $f3->route('PUT /users/@ref', 'renickbuettner\App\Users->updateUser');
+        $f3->route('DELETE /users/@ref', 'renickbuettner\App\Users->deleteUser');
 
         /**
          *  [ SESSION OPERATIONS ]
@@ -47,14 +49,13 @@ class Api
 
 
 
-        //$f3->route('GET /users/@id', 'renickbuettner\App\Users->getUser');
-        //$f3->route('DELETE /users/@id', 'renickbuettner\App\Users->deleteUser');
-        //$f3->route('PUT /users/@id', 'renickbuettner\App\Users->updateUser');
-
-
-
+        $f3->route('GET /statistics', 'renickbuettner\App\Statistics->get');
     }
 
+    //
+    //  TO BE REMOVED -.-
+    //
+    //
     public static function about($f3)
     {
         echo json_encode(

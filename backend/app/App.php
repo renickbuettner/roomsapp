@@ -14,12 +14,8 @@ class App
 {
     const VERSION = "1.0";
 
-    private $rm, $db, $api;
-
     public function __construct($f3)
     {
-        //$db  = new Database($f3);
-        //$api = new Api($f3);
         $f3->set("Database", new Database($f3));
         $f3->set("Api", new Api($f3));
     }
@@ -27,11 +23,21 @@ class App
     public static function hello() {
         (new Response([
             "RoomsApp" => [
-                "Version" => App::VERSION,
-                "Routes"  => [
+                "version" => App::VERSION,
+                "routes"  => [
                     "/rooms",
+                    "/reservations",
                     "/users",
-                    "/reservations"
+                    "/session"
+                ],
+                "about" => [
+                    "developers" => [
+                        [
+                            "name" => "Renick Büttner",
+                            "href" => "https://renickbuettner.de",
+                            "twitter" => "@RenickB"
+                        ]
+                    ]
                 ]
             ]
         ]))->send();
