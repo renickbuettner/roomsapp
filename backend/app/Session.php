@@ -20,7 +20,7 @@ class Session
 
     public function get()
     {
-        
+
     }
 
     public function post()
