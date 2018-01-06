@@ -19,7 +19,7 @@ class Session
         try {
             session_unset();
         } catch (\Exception $e){}
-        $f3->error(410);
+        $f3->error(204);
     }
 
     public function get($f3, $params)

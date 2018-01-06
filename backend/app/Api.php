@@ -21,15 +21,15 @@ class Api
          *  [ ROOM OPERATIONS ]
          */
         $f3->route('GET /rooms', 'renickbuettner\App\Rooms->getRooms');
-        //$f3->route('POST /rooms', 'renickbuettner\App\Rooms->addRoom');
+        $f3->route('POST /rooms', 'renickbuettner\App\Rooms->createRoom');
 
-        $f3->route('GET /rooms/@id', 'renickbuettner\App\Rooms->getRoom');
-        //$f3->route('DELETE /rooms/@id', 'renickbuettner\App\Rooms->deleteRoom');
-        //$f3->route('PUT /rooms/@id', 'renickbuettner\App\Rooms->updateRoom');
+        $f3->route('GET /rooms/@ref', 'renickbuettner\App\Rooms->getRoom');
+        $f3->route('DELETE /rooms/@ref', 'renickbuettner\App\Rooms->deleteRoom');
+        $f3->route('PUT /rooms/@ref', 'renickbuettner\App\Rooms->updateRoom');
 
-        //$f3->route('GET /rooms/@id/reservations', 'renickbuettner\App\Reservation->getReservations');
-        //$f3->route('DELETE /rooms/@id/reservations', 'renickbuettner\App\Reservation->deleteReservation');
-        //$f3->route('PUT /rooms/@id/reservations', 'renickbuettner\App\Reservation->updateReservation');
+        //$f3->route('GET /rooms/@ref/reservations', 'renickbuettner\App\Reservation->getReservations');
+        //$f3->route('DELETE /rooms/@ref/reservations', 'renickbuettner\App\Reservation->deleteReservation');
+        //$f3->route('PUT /rooms/@ref/reservations', 'renickbuettner\App\Reservation->updateReservation');
 
         /**
          *  [ USER OPERATIONS ]

@@ -66,7 +66,7 @@ class Users
         $f3->error(404);
     }
 
-    public function getUsers($f3, $params)
+    public function getUsers($f3)
     {
         try {
             foreach (User::createFromDatabase($f3) as $user)
@@ -100,9 +100,6 @@ class Users
                 }
             } catch (\Exception $e){}
 
-            var_dump($_PUT);
-            var_dump($usr);
-
             (new Response(
                 [$usr->toArray()]
             ))->send();
@@ -126,7 +123,7 @@ class Users
                 return;
             }
         } catch (\Exception $e){}
-        $f3->error(404);
+        $f3->error(204);
     }
 
 }

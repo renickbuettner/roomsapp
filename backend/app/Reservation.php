@@ -12,17 +12,29 @@ namespace renickbuettner\App;
 class Reservation
 {
 
-    public $Time, $Person, $Uuid;
+    public  $begin,
+            $end,
+            $user,
+            $uuid;
 
-    public function getReservation($f3){
+    public function __construct($begin, $end, $user, $uuid)
+    {
+        $this->begin = $begin;
+        $this->end   = $end;
+        $this->uuid  = $uuid;
+        $this->user  = $user;
+    }
+
+    public function save($f3){
 
     }
 
-    public function updateReservation($f3){
+    public function delete($f3){
 
     }
 
-    public function deleteReservation($f3){
+    public function toArray()
+    {
 
     }
 

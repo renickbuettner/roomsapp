@@ -89,4 +89,44 @@ class Database
         } catch (\Exception $e){}
     }
 
+    public function writeRoom(Room $room)
+    {
+        try {
+            if($room->uuid == null)
+            {
+                $this->db->exec(
+                    "INSERT INTO rooms (`name`, `location`) VALUES (:name, :location);",
+                    [
+                        ":name" => $room->name,
+                        ":location" => $room->location
+                    ]);
+                return $this->db->pdo()->lastInsertId();
+            } else {
+                $this->db->exec(
+                    "UPDATE rooms SET `name`=:name, `location`=:location ".
+                    "WHERE `id`=:id;",
+                    [
+                        ":id" => $room->uuid,
+                        ":name" => $room->name,
+                        ":location" => $room->location
+                    ]);
+            }
+        } catch (\Exception $e){}
+    }
+
+    public function removeRoom(Room $room)
+    {
+        try {
+            $this->db->exec(
+                "DELETE FROM rooms WHERE `id`=:id;",
+                [
+                    ":id" => $room->uuid
+                ]);
+        } catch (\Exception $e){}
+    }
+
+
+
+
+
 }
