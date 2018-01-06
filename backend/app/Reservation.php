@@ -25,6 +25,8 @@ class Reservation
         $this->end   = $end;
         $this->uuid  = $uuid;
         $this->user  = $user;
+        $this->room  = $room;
+        $this->notes = $notes;
     }
 
     public function save($f3){

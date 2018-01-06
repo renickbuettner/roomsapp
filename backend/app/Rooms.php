@@ -37,6 +37,12 @@ class Rooms
 
     public function createRoom($f3){
         try {
+
+            if(!Permissions::canEditRooms()){
+                $f3->error(403);
+                return;
+            }
+
             parse_str(file_get_contents('php://input'), $params);
 
             try {
@@ -46,6 +52,11 @@ class Rooms
                     return;
                 }
             } catch (\Exception $e){}
+
+            if(!(strlen($params["name"]) > 1) && !(strlen($params["location"]) > 1)){
+                $f3->error(406);
+                return;
+            }
 
             $room = new Room($params["name"], $params["location"]);
             $room->save($f3);
@@ -61,6 +72,12 @@ class Rooms
 
     public function deleteRoom($f3, $params){
         try {
+
+            if(!Permissions::canEditRooms()){
+                $f3->error(403);
+                return;
+            }
+
             $room = (Rooms::createFromDatabase($f3, $params["ref"]))[0];
             if($room instanceof Room) {
 
@@ -77,19 +94,24 @@ class Rooms
 
     public function updateRoom($f3, $params){
         try {
+
+            if(!Permissions::canEditRooms()){
+                $f3->error(403);
+                return;
+            }
+
             $room = (Rooms::createFromDatabase($f3, $params["ref"]))[0];
             if($room instanceof Room) {
 
                 parse_str(file_get_contents('php://input'), $_PUT);
 
-                if(isset($_PUT["location"]))
+                if(isset($_PUT["location"]) && $_PUT["location"] != "")
                     $room->location  = $_PUT["location"];
 
-                if(isset($_PUT["name"]))
+                if(isset($_PUT["name"]) && $_PUT["location"] != "")
                     $room->name = $_PUT["name"];
 
                 $room->save($f3);
-
 
                 (new Response(
                     [$room->toArray()]

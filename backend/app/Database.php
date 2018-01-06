@@ -125,7 +125,7 @@ class Database
         } catch (\Exception $e){}
     }
 
-    public function getReservation($id)
+    public function getReservations($id)
     {
         try {
             if($id != "*"){
@@ -140,14 +140,12 @@ class Database
         }
     }
 
-    public function filterReservation($key, $val)
+    public function filterReservations($key, $val)
     {
         try {
             return $this->db->exec(
-                "SELECT * FROM reservations WHERE :key=:val",
-                [
-                    "key"=>$key,
-                    "val"=>$val]);
+                "SELECT * FROM reservations WHERE `".$key."`=?;",
+                [$val]);
         } catch (\Exception $e){
             return null;
         }
@@ -191,6 +189,19 @@ class Database
                 "DELETE FROM reservations WHERE `id`=:id;",
                 [
                     ":id" => $res->uuid
+                ]);
+        } catch (\Exception $e){}
+    }
+
+    public function countReservations($room, $begin, $end)
+    {
+        try {
+            return $this->db->exec(
+                "SELECT COUNT(*) as `int` FROM reservations WHERE `room` = :room AND `begin` <= :begin AND `end` >= :end ;",
+                [
+                    ":begin" => $begin,
+                    ":end" => $end,
+                    ":room" => $room
                 ]);
         } catch (\Exception $e){}
     }

@@ -46,6 +46,7 @@ class Session
                 if ($usr->auth($_PUT["password"])) {
                     $_SESSION["uuid"]  = $usr->uuid;
                     $_SESSION["email"] = $usr->email;
+                    $_SESSION["group"] = $usr->group;
                     (new Response($usr->toArray()))->send();
                     return;
                 }

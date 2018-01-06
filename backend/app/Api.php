@@ -26,8 +26,8 @@ class Api
         $f3->route('GET /reservations/@ref', 'renickbuettner\App\Reservations->getReservationsByID');
         $f3->route('GET /rooms/@ref/reservations', 'renickbuettner\App\Reservations->getReservationsByRoom');
         $f3->route('POST /rooms/@ref/reservations', 'renickbuettner\App\Reservations->create');
-        $f3->route('PUT /reservations', 'renickbuettner\App\Reservations->update');
-        $f3->route('DELETE /rooms/@ref/reservations', 'renickbuettner\App\Reservations->remove');
+        $f3->route('PUT /reservations/@ref', 'renickbuettner\App\Reservations->update');
+        $f3->route('DELETE /reservations/@ref', 'renickbuettner\App\Reservations->remove');
 
         $f3->route('GET /users', 'renickbuettner\App\Users->getUsers');
         $f3->route('GET /users/@ref', 'renickbuettner\App\Users->getUser');

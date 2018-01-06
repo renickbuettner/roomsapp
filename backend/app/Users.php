@@ -37,6 +37,12 @@ class Users
     public static function updateUser($f3, $params)
     {
         try {
+
+            if(!Permissions::canEditUsers()){
+                $f3->error(403);
+                return;
+            }
+
             $email = base64_decode($params["ref"]);
             $usr = (User::createFromDatabase($f3, $email))[0];
             if( $usr instanceof User) {
@@ -69,6 +75,12 @@ class Users
     public function getUsers($f3)
     {
         try {
+
+            if(!Permissions::canViewUsers()){
+                $f3->error(403);
+                return;
+            }
+
             foreach (User::createFromDatabase($f3) as $user)
                 $r[] = $user->toArray();
             (new Response($r))->send();
@@ -80,6 +92,12 @@ class Users
     public function createUser($f3)
     {
         try {
+
+            if(!Permissions::canEditUsers()){
+                $f3->error(403);
+                return;
+            }
+
             parse_str(file_get_contents('php://input'), $_PUT);
 
             try {
@@ -89,6 +107,12 @@ class Users
                     return;
                 }
             } catch (\Exception $e){}
+
+            if(strlen($_PUT["name"] > 3)
+                && strlen($_PUT["email"] > 5)){
+                $f3->error(406);
+                return;
+            }
 
             $usr = new User($_PUT["name"], $_PUT["email"], $_PUT["group"], null, null);
             $usr->save($f3);
@@ -111,6 +135,12 @@ class Users
     public function deleteUser($f3, $params)
     {
         try {
+
+            if(!Permissions::canEditUsers()){
+                $f3->error(403);
+                return;
+            }
+
             $email = base64_decode($params["ref"]);
             $usr = (User::createFromDatabase($f3, $email))[0];
             if( $usr instanceof User) {
