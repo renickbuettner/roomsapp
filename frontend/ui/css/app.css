@@ -1,7 +1,12 @@
+/**
+ * Simple UI-Kit for RAD WebApp by @RenickB
+ *
+ * Image by Tristan Gassert, thanks!
+ */
 /*
  * Base
  */
-html, body { height: 100% }
+html, body { height: 100%; background:rgba(52,52,52,0.82); }
 section.screen {
     display: none;
 }
