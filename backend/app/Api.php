@@ -14,7 +14,9 @@ class Api
 
     public function __construct($f3)
     {
-        $f3->route('GET|POST|PUT|DELETE /', 'renickbuettner\App\App::hello');
+        $f3->route('GET /', 'renickbuettner\App\Frontend::get');
+        $f3->route('GET /app.js', 'renickbuettner\App\Frontend::js');
+        $f3->route('GET|POST|PUT|DELETE /api', 'renickbuettner\App\App::hello');
 
         $f3->route('GET /rooms', 'renickbuettner\App\Rooms->getRooms');
         $f3->route('GET /rooms/@ref', 'renickbuettner\App\Rooms->getRoom');

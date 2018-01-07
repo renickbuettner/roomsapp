@@ -1,0 +1,114 @@
+/**
+ * Simple UI-Kit for RAD WebApp by @RenickB
+ *
+ * Image by Natalia Y, thanks!
+ */
+/*
+ * Base
+ */
+html, body { height: 100%; background-color:rgba(52,52,52,0.82); }
+section.screen {
+    display: none;
+    height: 100%;
+}
+
+/**
+ * View: login
+ */
+.login .cr-container { animation-delay: 3s }
+
+.login .cr {
+    padding-top: .45rem;
+}
+
+.login .cr .badge {
+    margin-right: 10px;
+}
+
+.login .input-user {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.login .input-pwd,
+.login .input-group-btn > .btn {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.login-form {
+    background: rgba(0,0,0, .4);
+    padding: .2rem .0rem .05rem .0rem;
+    border-radius: .5rem;
+}
+
+body.login {
+    background: url("../img/00-01.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/**
+ * View: login
+ */
+.dashboard,
+.dashboard > .row,
+.dashboard > .row > div {
+    height: 100%;
+    overflow-x: hidden;
+    padding-right: 0;
+}
+
+.dashboard .align-items-center {
+    padding: 2rem;
+}
+
+.dashboard .topnav {
+    margin: 2rem 0;
+}
+
+.dashboard .btn-group .btn {
+    border-radius: 2rem;
+}
+
+/*
+ * Viewport
+ */
+.viewport {
+    padding: 3rem;
+}
+.viewport .room:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+/*
+ * Rooms
+ */
+.room {
+    display: inline;
+}
+
+/*
+ * Snackbar
+ */
+
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: rgba(51, 51, 51, 0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 1rem;
+    top: 1rem;
+}
+
+#snackbar.show {
+    visibility: visible;
+}

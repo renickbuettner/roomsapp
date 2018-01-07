@@ -28,13 +28,11 @@ class Session
         {
             $usr = User::createFromDatabase($f3, $_SESSION["email"])[0];
             if($usr instanceof User) {
-                (new Response([
-                    ["user" => $usr->toArray()]
-                ]))->send();
+                (new Response($usr->toArray()))->send();
                 return;
             }
         } else
-            $this->invalidSession();
+            $this->invalidSession($f3);
     }
 
     public function post($f3, $params)
@@ -52,7 +50,7 @@ class Session
                 }
             }
         } catch (\Exception $e){}
-        $this->invalidSession();
+        $this->invalidSession($f3);
     }
 
     private function validate()
@@ -62,12 +60,13 @@ class Session
         else return false;
     }
 
-    private function invalidSession()
+    private function invalidSession($f3)
     {
         (new Response([
             "session" => null,
             "expecting" => ["email", "password"]
         ]))->send();
+        $f3->error(400);
     }
 
 }

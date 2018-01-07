@@ -12,9 +12,12 @@ App = {
     addons: {},
     l: {}, // l stands for function library
     events: {},
-    init: function () {
-        App.l.onStart()
-    }
+    init: function (uri, screen) {
+        App.cache._backenduri = uri;
+        App.l.onStart();
+        App.loadScreen(screen);
+    },
+    debug: true
 };
 
 App.log = function (s) {
@@ -28,7 +31,14 @@ App.l.onStart = function(){
     }
 };
 
-function TEvent(name, call) {
+App.cache._elems = {};
+App.l.getElemById = function (id) {
+    if(App.cache._elems[id] === undefined){
+        App.cache._elems[id] = document.getElementById(id)}
+    return (App.cache._elems[id]);
+};
+
+App.TEvent = function(name, call) {
     this.name  = name;
     this.start = call;
-}
+};

@@ -9,27 +9,30 @@
     <link rel="stylesheet" href="/ui/css/animate.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/ui/css/app.css" crossorigin="anonymous">
 </head>
-<body onload="App.init()">
+<body onload="App.init('/', 'screen.login');">
 
 <!-- Login screen -->
-<section class="screen login" id="screen.login" data-style-body="background:rgba(52,52,52,0.82);">
-    <div class="container-fluid">
-        <small class="float-right text-light cr">
-            <span class="badge badge-warning text-white">beta</span>
-            &copy; Renick Büttner
-        </small><br>
-        <h1 class="text-center text-light">Raumverwaltung</h1>
-        <div class="row justify-content-sm-center">
-            <div class="col col-sm-7 col-md-5 col-lg-4">
-                <div class="login-form animated zoomIn">
-                    <input type="text" class="form-control form-control-lg input-user" placeholder="Benutzer" aria-label="Benutzer">
+<section class="screen login" id="screen.login" data-bodyclass="login">
+    <div class="container-fluid h-100">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col col-sm-7 col-md-5 col-lg-3">
+                <div class="login-form animated zoomIn text-right">
+                    <h1 class="text-center text-light">Raumverwaltung</h1>
+                    <input type="email" class="form-control form-control-lg input-user" placeholder="Email" aria-label="Email" id="loginInputEmail">
                     <div class="input-group input-group-lg">
-                        <input type="password" class="form-control input-pwd" placeholder="Passwort" aria-label="Passwort">
+                        <input minlength="5" type="password" class="form-control input-pwd" placeholder="Passwort"
+                               aria-label="Passwort" id="loginInputPasswd">
                         <span class="input-group-btn">
-                        <button class="btn btn-secondary" type="button" onclick="App.loadScreen('screen.dashboard')">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i></button>
-                    </span>
+                            <button class="btn btn-secondary" type="button" id="btnLogin">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                        </span>
                     </div>
+                </div>
+                <div class="d-block animated fadeIn cr-container text-center">
+                    <small class="text-light cr">
+                        <span class="badge badge-warning text-white">beta</span>
+                        &copy; Renick Büttner
+                    </small>
                 </div>
             </div>
         </div>
@@ -43,8 +46,8 @@
             <div class="align-items-center">
                 <div class="topnav text-center">
                     <div class="btn-group btn-group-lg" role="group">
-                        <button type="button" class="btn btn-outline-dark" disabled>Fr. Schwarz</button>
-                        <button type="button" class="btn btn-danger" onclick="App.loadScreen('screen.login')">
+                        <button type="button" class="btn btn-outline-dark" id="btnUsername" disabled>...</button>
+                        <button type="button" class="btn btn-danger" id="btnLogout">
                             <i class="fa fa-sign-out" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -114,12 +117,16 @@
             </div>
         </a>
     </div>
+    <div id="template.snackLoginFailed"><span class="text-danger">Du konntest nicht eingeloggt werden. Überprüfe deine Eingaben.</span></div>
+    <div id="template.snackConFailed"><span class="text-danger">Verbindung fehlgeschlagen.</span></div>
 </section>
+
+<div id="snackbar"></div>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="/ui/js/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="/ui/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="app.js.php" crossorigin="anonymous"></script>
+<script src="app.js" crossorigin="anonymous"></script>
 </body>
 </html>
