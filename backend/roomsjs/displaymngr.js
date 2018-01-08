@@ -55,6 +55,11 @@ App.addons.DisplayManager.screen = {
                 base[task].start()
             }
         }
+    },
+    appendScreenTask: function (screen, name, task) {
+        if(App.cache.screenTasks[screen] === undefined)
+            App.cache.screenTasks[screen] = {};
+        App.cache.screenTasks[screen][name] = task;
     }
 };
 
@@ -65,17 +70,21 @@ App.TScreenTask = function(name, call) {
 };
 
 App.cache._templates = [];
-App.getTemplate = function (name) {
+App.l.getTemplate = function (name) {
     if(App.cache._templates[name] === undefined){
         App.cache._templates[name] = document.getElementById(name).innerHTML;
     }
     return (App.cache._templates[name]);
 };
 
-App.loadView = function (v) {
-    this.addons.DisplayManager.loadView(v)
+App.l.loadView = function (v) {
+    App.addons.DisplayManager.loadView(v)
 };
 
-App.loadScreen = function (s) {
-    this.addons.DisplayManager.screen.enable(s)
+App.l.loadScreen = function (s) {
+    App.addons.DisplayManager.screen.enable(s)
+};
+
+App.l.appendScreenTask = function (screen, name, task) {
+    App.addons.DisplayManager.screen.appendScreenTask(screen, name, task)
 };

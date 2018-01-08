@@ -7,7 +7,7 @@ App.events["onLogin"] = new App.TEvent("onLogin", function () {
         App.cache.session = new App.TSession(email, passwd);
         App.cache.session.create(function (state, response) {
             if (state !== 200) {
-                App.addons.snackbar.show(App.getTemplate("template.snackLoginFailed"));
+                App.addons.snackbar.show(App.l.getTemplate("template.snackLoginFailed"));
             }
             else {
                 App.addons.session.setup(response);

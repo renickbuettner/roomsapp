@@ -15,7 +15,7 @@ App = {
     init: function (uri, screen) {
         App.cache._backenduri = uri;
         App.l.onStart();
-        App.loadScreen(screen);
+        App.l.loadScreen(screen);
     },
     debug: true
 };

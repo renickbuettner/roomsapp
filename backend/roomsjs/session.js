@@ -19,7 +19,7 @@ App.addons.session = {
     setup: function (user) {
         App.cache.user = new App.TUser(
             user.uuid, user.name, user.email, user.group);
-        App.loadScreen("screen.dashboard");
+        App.l.loadScreen("screen.dashboard");
     },
     remove: function () {
         App.bridge.removeSession(function (state, response) {

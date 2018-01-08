@@ -29,9 +29,9 @@
                     </div>
                 </div>
                 <div class="d-block animated fadeIn cr-container text-center">
-                    <small class="text-light cr">
-                        <span class="badge badge-warning text-white">beta</span>
+                    <small class="cr">
                         &copy; Renick Büttner
+                        <span class="badge badge-warning text-white">beta</span>
                     </small>
                 </div>
             </div>
@@ -41,60 +41,53 @@
 
 <!-- App -->
 <section class="screen dashboard" id="screen.dashboard">
-    <div class="row">
-        <div class="col-lg-4 bg-light animated slideInLeft">
-            <div class="align-items-center">
-                <div class="topnav text-center">
-                    <div class="btn-group btn-group-lg" role="group">
-                        <button type="button" class="btn btn-outline-dark" id="btnUsername" disabled>...</button>
-                        <button type="button" class="btn btn-danger" id="btnLogout">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i></button>
-                    </div>
+    <div class="container">
+        <div class="animated zoomIn">
+            <div class="topnav text-right">
+                <div class="btn-group btn-group-lg" role="group">
+                    <button type="button" class="btn btn-outline-light" id="btnUsername" disabled></button>
+                    <button type="button" class="btn btn-danger" id="btnLogout">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i></button>
                 </div>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#rooms">
-                            <i class="fa fa-building-o" aria-hidden="true"></i>
-                            Räume</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#users">
-                            <i class="fa fa-users" aria-hidden="true"></i>
-                            Benutzer</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="#clients">
-                            <i class="fa fa-desktop" aria-hidden="true"></i>
-                            Clients</a>
-                    </li>
-                </ul>
             </div>
-        </div>
-        <div class="col bg-dark animated slideInRight">
-
-            <!-- Rooms -->
-            <div class="viewport" id="viewport">
-            </div>
-
+            <div class="viewport" id="viewport"></div>
         </div>
     </div>
+    <nav class="navbar fixed-bottom navbar-light animated slideInUp" id="toolbar">
+        <span class="navbar-brand mb-0 h1 text-secondary">Toolbar</span>
+        <a class="nav-item nav-link" href="#">
+            <i class="fa fa-tachometer" aria-hidden="true"></i>
+            Status</a>
+        <a class="nav-item nav-link" href="#">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Neuer Raum</a>
+        <a class="nav-item nav-link" href="#">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            Neuer Benutzer</a>
+        <a class="nav-item nav-link disabled" href="https://renickbuettner.de" target="_blank">© Renick Büttner</a>
+    </nav>
 </section>
 
 <section class="screen">
     <div id="template.room">
-        <a href="#$room" class="room p-3">
+        <a href="$href" class="room p-3">
             <div class="card bg-secondary" style="width: 20rem;">
                 <div class="card-header text-white">
                     <span>$room</span>
                 </div>
                 <ul class="list-group list-group-flush text-dark">
-                    <li class="list-group-item">$building</li>
-                    <li class="list-group-item">$currentState</li>
+                    <li class="list-group-item text-right">
+                        <i class="fa fa-home text-secondary float-left" aria-hidden="true"></i>
+                        $building</li>
+                    <li class="list-group-item text-right">
+                        <i class="fa fa-user-times text-secondary float-left" aria-hidden="true"></i>
+                        $currentState</li>
                 </ul>
             </div>
         </a>
     </div>
     <div id="template.roomContainer">
+        <h1 class="text-light">Räume</h1>
         <div class="d-flex flex-wrap">
             $rooms
         </div>
@@ -105,7 +98,7 @@
         </div>
     </div>
     <div id="template.user">
-        <a href="#room123" class="room p-3">
+        <a href="$href" class="room p-3">
             <div class="card bg-secondary" style="width: 20rem;">
                 <div class="card-header text-white">
                     <span>$room</span>

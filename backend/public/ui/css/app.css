@@ -19,6 +19,7 @@ section.screen {
 
 .login .cr {
     padding-top: .45rem;
+    color: rgba(247, 247, 247, 0.79);
 }
 
 .login .cr .badge {
@@ -77,11 +78,28 @@ body.login {
  * Viewport
  */
 .viewport {
-    padding: 3rem;
+    padding: 1rem;
 }
 .viewport .room:hover {
     text-decoration: none;
     color: #000;
+}
+
+/*
+ * Toolbar
+ */
+
+#toolbar a {
+    color: #fff;
+}
+
+#toolbar a:hover {
+    color: #d68300;
+}
+
+#toolbar a.disabled,
+#toolbar a.disabled:hover {
+    color: #ccc;
 }
 
 /*
