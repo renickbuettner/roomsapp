@@ -7,7 +7,7 @@ App.TView = function (name, template, defs) {
 
 App.TView.prototype = {
     html: function() {
-        App.log("[DisplayManager] View: Render: "+this.name);
+        App.log("[DM] View rendered: "+this.name);
         temp = this.template.toString();
         for (var key in this.definitions) {
             if (this.definitions.hasOwnProperty(key)) {

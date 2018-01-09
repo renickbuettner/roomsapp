@@ -6,11 +6,22 @@
 /*
  * Base
  */
-html, body { height: 100%; background-color:rgba(52,52,52,0.82); }
+html, body { height: 100%; }
+
+html, body, #toolbar {
+    background-color: #2F2F2F;
+}
+
 section.screen {
     display: none;
     height: 100%;
 }
+
+button.clickable:hover {
+    cursor: pointer;
+}
+
+.hidden { display: none; }
 
 /**
  * View: login
@@ -78,7 +89,7 @@ body.login {
  * Viewport
  */
 .viewport {
-    padding: 1rem;
+    padding: 1rem 0 5rem 0;
 }
 .viewport .room:hover {
     text-decoration: none;
@@ -116,7 +127,7 @@ body.login {
 #snackbar {
     visibility: hidden;
     min-width: 250px;
-    background-color: rgba(51, 51, 51, 0.75);
+    background-color: rgba(244, 244, 244, 0.95);
     color: #fff;
     text-align: center;
     border-radius: 2px;
@@ -129,4 +140,13 @@ body.login {
 
 #snackbar.show {
     visibility: visible;
+}
+
+/*
+ * Rooms
+ */
+
+.formCreateRoom {
+    display: block;
+    position: relative;
 }

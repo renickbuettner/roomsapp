@@ -4,5 +4,7 @@ App.events.initDashboard = new App.TEvent("initDashboard", function () {
         "initDashboard",
         new App.TScreenTask("initDashboard", function () {
             App.l.getElemById("btnUsername").innerText = App.cache.user.name;
-            App.addons.router.callBack("#/rooms")}));
+            App.addons.router.callBack(
+                App.addons.RoomManager.ROUTES.rooms())
+        }));
 });

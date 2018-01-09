@@ -18,3 +18,22 @@ App.TUser.prototype = {
     requestNameChange: function () {},
     requestCreation: function () {}
 };
+
+App.addons.UserManager = {
+    ROUTES: {
+        users: function () {
+            return "/users";
+        },
+        createUser: function () {
+            
+        },
+        editUser: function () {
+            
+        }
+    }
+};
+
+
+App.events.UserManager = new App.TEvent("UserManager", function () {
+
+});

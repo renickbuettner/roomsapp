@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/ui/css/animate.css" crossorigin="anonymous">
     <link rel="stylesheet" href="/ui/css/app.css" crossorigin="anonymous">
 </head>
-<body onload="App.init('/', 'screen.login');">
+<body>
 
 <!-- Login screen -->
 <section class="screen login" id="screen.login" data-bodyclass="login">
@@ -23,7 +23,7 @@
                         <input minlength="5" type="password" class="form-control input-pwd" placeholder="Passwort"
                                aria-label="Passwort" id="loginInputPasswd">
                         <span class="input-group-btn">
-                            <button class="btn btn-secondary" type="button" id="btnLogin">
+                            <button class="btn btn-secondary clickable" type="button" id="btnLogin">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i></button>
                         </span>
                     </div>
@@ -46,7 +46,7 @@
             <div class="topnav text-right">
                 <div class="btn-group btn-group-lg" role="group">
                     <button type="button" class="btn btn-outline-light" id="btnUsername" disabled></button>
-                    <button type="button" class="btn btn-danger" id="btnLogout">
+                    <button type="button" class="btn btn-danger clickable" id="btnLogout">
                         <i class="fa fa-sign-out" aria-hidden="true"></i></button>
                 </div>
             </div>
@@ -55,15 +55,15 @@
     </div>
     <nav class="navbar fixed-bottom navbar-light animated slideInUp" id="toolbar">
         <span class="navbar-brand mb-0 h1 text-secondary">Toolbar</span>
-        <a class="nav-item nav-link" href="#">
-            <i class="fa fa-tachometer" aria-hidden="true"></i>
-            Status</a>
-        <a class="nav-item nav-link" href="#">
+        <a class="nav-item nav-link" href="#/rooms">
+            <i class="fa fa-th-large" aria-hidden="true"></i>
+            Übersicht</a>
+        <a class="nav-item nav-link" href="#/rooms/create">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Neuer Raum</a>
-        <a class="nav-item nav-link" href="#">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-            Neuer Benutzer</a>
+        <a class="nav-item nav-link" href="#/users">
+            <i class="fa fa-group" aria-hidden="true"></i>
+            Benutzer</a>
         <a class="nav-item nav-link disabled" href="https://renickbuettner.de" target="_blank">© Renick Büttner</a>
     </nav>
 </section>
@@ -112,14 +112,48 @@
     </div>
     <div id="template.snackLoginFailed"><span class="text-danger">Du konntest nicht eingeloggt werden. Überprüfe deine Eingaben.</span></div>
     <div id="template.snackConFailed"><span class="text-danger">Verbindung fehlgeschlagen.</span></div>
+    <div id="template.snackRoomCreated"><span class="text-success">Ein Raum wurde hinzugefügt!</span></div>
+    <div id="template.createRoom">
+        <div class="modal formCreateRoom" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa fa-location-arrow text-primary" aria-hidden="true"></i>
+                            Neuen Raum hinzufügen</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <span>Wie heißt der Raum?</span>
+                            <input class="form-control" type="text" id="criName" minlength="4" maxlength="64">
+                        </p>
+                        <p class="pt-2">
+                            <span>Wo bedindet sich der Raum?</span>
+                            <input class="form-control" type="text" id="criLocation" minlength="4" maxlength="64">
+                        </p>
+                    </div>
+                    <div class="modal-body bg-danger py-3 hidden" id="criWarn">
+                        <span class="text-white">
+                            Deine Eingaben sind unvollständig oder ungültig.<br>
+                            Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnRoomCreate" type="button" class="btn btn-outline-primary clickable btnRoomCreate">Raum anlegen</button>
+                        <button id="btnRoomCreateCancel" type="button" class="btn btn-secondary clickable">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div id="snackbar"></div>
 
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS
 <script src="/ui/js/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="/ui/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="/ui/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
 <script src="app.js" crossorigin="anonymous"></script>
 </body>
 </html>

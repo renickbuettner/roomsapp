@@ -12,23 +12,35 @@ App = {
     addons: {},
     l: {}, // l stands for function library
     events: {},
-    init: function (uri, screen) {
-        App.cache._backenduri = uri;
-        App.l.onStart();
-        App.l.loadScreen(screen);
-    },
-    debug: true
+    debug: false,
+    defaults: {
+        uri: "/",
+        screen: "screen.login"
+    }
 };
 
 App.log = function (s) {
     console.log(s)
 };
 
-App.l.onStart = function(){
+App.l.init = function () {
+    App.log("[RoomsApp] Hello!");
+    App.cache._backenduri = App.defaults.uri;
+    App.l.loadEvents();
+    App.l.loadScreen(App.defaults.screen);
+};
+
+App.l.loadEvents = function(){
     for(var ev in App.events){
         App.log("[Events] Added: " + App.events[ev].name);
         App.events[ev].start()
     }
+};
+
+App.broadcast = function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        App.l.init();
+    }, false);
 };
 
 App.cache._elems = {};
@@ -42,3 +54,5 @@ App.TEvent = function(name, call) {
     this.name  = name;
     this.start = call;
 };
+
+App.broadcast();
