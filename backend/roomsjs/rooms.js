@@ -29,6 +29,9 @@ App.addons.RoomManager = {
                             "\\$rooms": body
                         })
                     );
+
+                    document.querySelector("#viewport #btnContAction")
+                        .addEventListener("click", App.addons.RoomManager.UI.createRoom, false);
                 }
                 else {
                     App.addons.snackbar.show(App.getTemplate("template.snackConFailed"))
@@ -73,7 +76,7 @@ App.addons.RoomManager = {
         },
         onFormLeave: function () {
             App.addons.router.callBack(App.addons.RoomManager.ROUTES.rooms());
-        },
+        }
     }
 };
 
@@ -98,10 +101,10 @@ App.TRoom.prototype = {
 App.events.RoomManager = new App.TEvent("RoomManager", function () {
     var slugRooms = App.addons.RoomManager.ROUTES.rooms();
     App.cache._routes[slugRooms] = new App.TRoute(slugRooms, function () {
-        App.addons.RoomManager.UI.getRooms();
+        App.addons.RoomManager.UI.getRooms()
     });
     var slugRoomCreate = App.addons.RoomManager.ROUTES.createRoom();
     App.cache._routes[slugRoomCreate] = new App.TRoute(slugRoomCreate, function () {
-       App.addons.RoomManager.UI.createRoom();
+       App.addons.RoomManager.UI.createRoom()
     });
 });

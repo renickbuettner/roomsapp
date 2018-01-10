@@ -9,6 +9,7 @@ App.addons.router = {
     callBack: function (name) {
         for(var r in App.cache._routes){
             if (r.trim() == name.trim()){
+                window.location.hash = r;
                 App.cache._routes[r].run()
             }
         }

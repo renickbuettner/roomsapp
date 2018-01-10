@@ -146,6 +146,7 @@ body.login {
  * Rooms
  */
 
+.formCreateUser,
 .formCreateRoom {
     display: block;
     position: relative;

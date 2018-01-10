@@ -87,9 +87,25 @@
         </a>
     </div>
     <div id="template.roomContainer">
-        <h1 class="text-light">Räume</h1>
+        <h1 class="text-light">
+            Räume
+            <button class="btn btn-outline-secondary float-right clickable" id="btnContAction">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Neuer Raum</button>
+        </h1>
         <div class="d-flex flex-wrap">
             $rooms
+        </div>
+    </div>
+    <div id="template.userContainer">
+        <h1 class="text-light">
+            Benutzer
+            <button class="btn btn-outline-secondary float-right clickable" id="btnContAction">
+                <i class="fa fa-user-times" aria-hidden="true"></i>
+                Neuer Benutzer</button>
+        </h1>
+        <div class="d-flex flex-wrap">
+            $users
         </div>
     </div>
     <div id="template.usermg">
@@ -141,6 +157,43 @@
                     <div class="modal-footer">
                         <button id="btnRoomCreate" type="button" class="btn btn-outline-primary clickable btnRoomCreate">Raum anlegen</button>
                         <button id="btnRoomCreateCancel" type="button" class="btn btn-secondary clickable">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="template.createUser">
+        <div class="modal formCreateUser" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa fa-user-times text-primary" aria-hidden="true"></i>
+                            Neuen Benutzer hinzufügen</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <span>Wie soll der Benutzer heißen?</span>
+                            <input class="form-control" type="text" id="cuName" minlength="4" maxlength="64">
+                        </p>
+                        <p class="pt-2">
+                            <span>Wie ist die E-Mail-Adresse des Benutzers?</span>
+                            <input class="form-control" type="text" id="cuEmail" minlength="4" maxlength="64">
+                        </p>
+                        <p class="pt-2">
+                            <span>Welches Passwort soll der Benutzer haben?</span>
+                            <input class="form-control" type="password" id="cuPwd" minlength="4" maxlength="64">
+                        </p>
+                    </div>
+                    <div class="modal-body bg-danger py-3 hidden" id="cuWarn">
+                        <span class="text-white">
+                            Deine Eingaben sind unvollständig oder ungültig.<br>
+                            Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnUserCreate" type="button" class="btn btn-outline-primary clickable btnRoomCreate">Benutzer anlegen</button>
+                        <button id="btnUserCreateCancel" type="button" class="btn btn-secondary clickable">Abbrechen</button>
                     </div>
                 </div>
             </div>
