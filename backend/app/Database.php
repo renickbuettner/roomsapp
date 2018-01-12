@@ -144,8 +144,23 @@ class Database
     {
         try {
             return $this->db->exec(
-                "SELECT * FROM reservations WHERE `".$key."`=?;",
-                [$val]);
+                "SELECT * FROM reservations WHERE `".$key."`= :val;",
+                ["val" => $val]);
+        } catch (\Exception $e){
+            return null;
+        }
+    }
+
+    public function filterReservationsInTimespan($key, $params)
+    {
+        try {
+            return $this->db->exec(
+                "SELECT id, room, (SELECT name FROM users WHERE id = user) as user, notes, begin, end FROM reservations WHERE `".$key."`=:ref AND `begin` >= :begin AND `end` <= :end;",
+                [
+                    "ref" => $params["ref"],
+                    "begin" => $params["begin"],
+                    "end" => $params["end"]
+                ]);
         } catch (\Exception $e){
             return null;
         }

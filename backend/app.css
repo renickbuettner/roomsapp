@@ -23,6 +23,10 @@ button.clickable:hover {
 
 .hidden { display: none; }
 
+.bg-very-dark {
+    background-color: #212529;
+}
+
 /**
  * View: login
  */
@@ -118,6 +122,20 @@ body.login {
  */
 .room {
     display: inline;
+}
+
+.rangepicker-group {
+    background: rgba(255,255,255, 0.3);
+    width: 150px;
+    float:right;
+    display: inline-block;
+    margin-bottom: 3rem;
+    color: #fff;
+}
+
+#rangepicker:active, #rangepicker:focus {
+    background: #fff;
+    color: #1b1e21;;
 }
 
 /*

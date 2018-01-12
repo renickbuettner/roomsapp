@@ -40,6 +40,24 @@ class Reservations
         $f3->error(404);
     }
 
+    public function filterReservationsByRoom($f3, $params){
+        try {
+            $con = $f3->get("Database");
+            $arr = [];
+            foreach ($con->filterReservationsInTimespan("room", $params) as $r)
+                $arr[] = (new Reservation(
+                    $r["begin"],
+                    $r["end"],
+                    $r["user"],
+                    $r["notes"],
+                    $r["room"],
+                    $r["id"]))->toArray();
+            (new Response($arr))->send();
+            return;
+        } catch (\Exception $e){}
+        $f3->error(404);
+    }
+
     public function getReservationsByID($f3, $params){
         try {
             $con = $f3->get("Database");

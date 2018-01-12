@@ -86,7 +86,15 @@ App.bridge = {
             })
     },
 
-    getReservationsByRoom: function (id) {},
+    getReservations: function (room, begin, end, callback) {
+        this.sendRequest(
+            "rooms/" + room.uuid + "/reservations/" + begin + "/" + end,
+            this.TYPES.GET,
+            {},
+            function (state, response) {
+                callback(state,response)
+            })
+    },
 
     createRoom: function (room, callback) {
         this.sendRequest("rooms",
@@ -109,7 +117,14 @@ App.bridge = {
 
     removeReservation: function (reservation) {},
 
-    getUsers: function () {},
+    getUsers: function (callback) {
+        this.sendRequest("users",
+            this.TYPES.GET,
+            {},
+            function (state, response) {
+                callback(state,response)
+            })
+    },
 
     createUser: function (user) {},
 

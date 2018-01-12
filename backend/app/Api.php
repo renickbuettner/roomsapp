@@ -16,6 +16,7 @@ class Api
     {
         $f3->route('GET /', 'renickbuettner\App\Frontend::get');
         $f3->route('GET /app.js', 'renickbuettner\App\Frontend::js');
+        $f3->route('GET /app.css', 'renickbuettner\App\Frontend::css');
         $f3->route('GET|POST|PUT|DELETE /api', 'renickbuettner\App\App::hello');
 
         $f3->route('GET /rooms', 'renickbuettner\App\Rooms->getRooms');
@@ -27,6 +28,7 @@ class Api
         $f3->route('GET /reservations', 'renickbuettner\App\Reservations->getReservations');
         $f3->route('GET /reservations/@ref', 'renickbuettner\App\Reservations->getReservationsByID');
         $f3->route('GET /rooms/@ref/reservations', 'renickbuettner\App\Reservations->getReservationsByRoom');
+        $f3->route('GET /rooms/@ref/reservations/@begin/@end', 'renickbuettner\App\Reservations->filterReservationsByRoom');
         $f3->route('POST /rooms/@ref/reservations', 'renickbuettner\App\Reservations->create');
         $f3->route('PUT /reservations/@ref', 'renickbuettner\App\Reservations->update');
         $f3->route('DELETE /reservations/@ref', 'renickbuettner\App\Reservations->remove');

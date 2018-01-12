@@ -28,12 +28,36 @@ class Frontend
         {
             if($item != "." && $item != ".."){
                 if($DEBUG || !$DEBUG && $item != "test.js") {
-                    $STREAM .= file_get_contents($DIR . $item) . PHP_EOL;
+                    try {
+                        $STREAM .= file_get_contents($DIR . $item) . PHP_EOL;
+                    } catch (\Exception $e){}
                 }
             }
         }
 
         header("Content-Type: application/javascript; charset=utf-8");
+        echo $STREAM;
+    }
+
+    public static function css()
+    {
+        $STREAM = "";
+
+        $FILES = [
+            "ui/css/animate.css",
+            "ui/css/flatpickr.css",
+            "ui/css/flatpickr.theme.dark.css",
+            "../app.css"
+        ];
+
+        foreach ($FILES as $f)
+        {
+            try {
+                $STREAM .= file_get_contents($f).PHP_EOL;
+            } catch (\Exception $e){}
+        }
+
+        header("Content-Type: text/css; charset=utf-8");
         echo $STREAM;
     }
 
