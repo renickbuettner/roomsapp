@@ -10,6 +10,7 @@ App.addons.router = {
         for(var r in App.cache._routes){
             if (r.trim() == name.trim()){
                 window.location.hash = r;
+                App.addons.Toolbar.resetToolbar();
                 App.cache._routes[r].run()
             }
         }

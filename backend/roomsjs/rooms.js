@@ -6,11 +6,20 @@ App.addons.RoomManager = {
         createRoom: function () {
             return (this.rooms() + "/create")
         },
-        "singleRoom": function (id) {
+        singleRoom: function (id) {
             return (this.rooms() + "/view/" + id)
+        },
+        createReservation: function () {
+            return (this.singleRoom(App.cache.lastOpenedRoom.uuid) + "/reserve")
         }
     },
     UI: {
+        BUTTONS: {
+            createReservation: function () {
+                return new App.TToolbarButton("createReservation", "Neue Reservierung", "fa-clock-o",
+                    App.addons.RoomManager.ROUTES.createReservation());
+            }
+        },
         getRooms: function () {
             App.bridge.getRooms(function (state, response) {
                 if(state == 200)
@@ -73,7 +82,9 @@ App.addons.RoomManager = {
                         "\\$location": room.location
                     })
                 );
-                App.addons.DateTimePicker.initSingleRoom()
+                App.addons.DateTimePicker.initSingleRoom();
+                var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
+                App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
             }
         }
     },

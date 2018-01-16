@@ -12,7 +12,7 @@ App = {
     addons: {},
     l: {}, // l stands for function library
     events: {},
-    debug: true,
+    debug: false,
     defaults: {
         uri: "/",
         screen: "screen.login"
