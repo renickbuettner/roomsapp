@@ -53,13 +53,25 @@ button.clickable:hover {
 }
 
 .login-form {
-    background: rgba(0,0,0, .4);
     padding: .2rem .0rem .05rem .0rem;
     border-radius: .5rem;
+    max-width: 650px;
+}
+
+.login .input-group .form-control {
+    color: rgba(17, 33, 76, 0.8);
+}
+
+.login-form, .login-form .btn.clickable {
+    background: rgba(17, 33, 76, 0.8);
+}
+
+.login-form h1 {
+    font-size: 2em;
 }
 
 body.login {
-    background: url("../img/00-01.jpg") no-repeat center center fixed;
+    background: url("/ui/img/00-01.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

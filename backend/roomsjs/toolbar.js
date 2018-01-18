@@ -11,6 +11,8 @@ App.addons.Toolbar = {
         var childs = App.l.getElemById(this.elemID).children;
         for (var i = 0; i < childs.length; i++)
         {
+            //
+            // Problem: das div element
             if( childs[i].hash == name )
             {
                 childs[i].remove()
@@ -34,7 +36,7 @@ App.addons.Toolbar = {
         var childs = App.l.getElemById(this.elemID).children;
         for (var i = 0; i < childs.length; i++)
         {
-            if (childs[i].getAttribute("data-primary") == "true") {
+            if (childs[i].getAttribute("data-primary") !== "true") {
                 childs[i].remove()
             }
         }
@@ -44,11 +46,12 @@ App.addons.Toolbar = {
 
 App.cache._toolbarBtns = {};
 
-App.TToolbarButton = function (name, desc, icon, href) {
+App.TToolbarButton = function (name, desc, icon, href, oc) {
     this.name = name;
     this.description = desc;
     this.icon = icon;
     this.href = href;
+    this.onclick = oc;
 };
 
 App.TToolbarButton.prototype = {
@@ -56,7 +59,8 @@ App.TToolbarButton.prototype = {
         return new App.TView("name", App.l.getTemplate("template.toolbarButton"), {
             "\\$icon": this.icon,
             "\\$href": "#" + this.href,
-            "\\$text": this.description
+            "\\$text": this.description,
+            "\\$onclick": this.onclick
         })
     }
 };

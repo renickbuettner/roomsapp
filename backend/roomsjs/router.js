@@ -16,6 +16,7 @@ App.addons.router = {
         }
     }
 };
+
 App.events.onNavigate = new App.TEvent("onNavigate", function () {
     tabs = document.getElementsByClassName("nav-link");
     for (var i = 0; i < tabs.length; i++) {

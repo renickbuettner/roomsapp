@@ -10,14 +10,18 @@ App.addons.RoomManager = {
             return (this.rooms() + "/view/" + id)
         },
         createReservation: function () {
-            return (this.singleRoom(App.cache.lastOpenedRoom.uuid) + "/reserve")
+            return "/reserve"
         }
     },
     UI: {
         BUTTONS: {
             createReservation: function () {
-                return new App.TToolbarButton("createReservation", "Neue Reservierung", "fa-clock-o",
-                    App.addons.RoomManager.ROUTES.createReservation());
+                return new App.TToolbarButton(
+                    "createReservation",
+                    "Neue Reservierung",
+                    "fa-clock-o",
+                    App.addons.RoomManager.ROUTES.createReservation(),
+                    "App.addons.RoomManager.UI.createReservation();");
             }
         },
         getRooms: function () {
@@ -85,6 +89,28 @@ App.addons.RoomManager = {
                 App.addons.DateTimePicker.initSingleRoom();
                 var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
                 App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
+            }
+        },
+        createReservation: function () {
+            var ref = document.location.hash.split('/')[3];
+            App.log("[Rooms] Create reservation for Room #" + ref);
+            if(App.cache._rooms[ref] === undefined)
+            {
+                App.addons.snackbar.show(App.l.getTemplate("template.snackDoesntExist"))
+            }
+            else {
+                var room = App.cache._rooms[ref];
+                App.l.loadView(
+                    new App.TView("CreateReservation", App.l.getTemplate("template.createReservation"), {
+                        "\\$room.name": room.name,
+                        "\\$room.uuid": room.uuid,
+                        "\\$room.location": room.location
+                    })
+                );
+                App.addons.DateTimePicker.initCreateReservation();
+
+                document.querySelector("#viewport .btnCancelCreate")
+                    .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
             }
         }
     },
@@ -156,6 +182,14 @@ App.addons.RoomManager = {
         else {
             elem.innerHTML = body;
         }
+    },
+    requestNewReservation: function () {
+
+        // check if room free
+        // send req
+        // load room with this day as range
+        //
+
     }
 };
 

@@ -1,7 +1,6 @@
 App.addons.DateTimePicker = {
 
     initSingleRoom: function () {
-
         flatpickr(document.querySelector("#viewport #rangepicker"), {
             dateFormat: "d.m.Y",
             maxDate: new Date().fp_incr(365),
@@ -17,6 +16,22 @@ App.addons.DateTimePicker = {
             defaultDate: "today"
         });
     },
+
+    initCreateReservation: function () {
+        flatpickr(document.querySelector("#viewport .rangepicker"), {
+            dateFormat: "d.m.Y",
+            maxDate: new Date().fp_incr(365),
+            minDate: "today",
+            "disable": [
+                function(date) { return (date.getDay() === 6 || date.getDay() === 0);}
+            ],
+            "locale": {
+                "firstDayOfWeek": 1
+            },
+            defaultDate: "today"
+        });
+    },
+
     Utils: {
         requestReservations: function(selectedDates, dateStr, instance) {
             console.log(selectedDates[0].toUTCString() + " = " + (moment(selectedDates[0].toUTCString()).unix()));

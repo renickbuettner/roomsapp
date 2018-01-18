@@ -14,7 +14,7 @@
 <section class="screen login" id="screen.login" data-bodyclass="login">
     <div class="container-fluid h-100">
         <div class="row h-100 justify-content-center align-items-center">
-            <div class="col col-sm-7 col-md-5 col-lg-3">
+            <div class="col col-sm-10 col-md-8 col-lg-3">
                 <div class="login-form animated zoomIn text-right">
                     <h1 class="text-center text-light">Raumverwaltung</h1>
                     <input type="email" class="form-control form-control-lg input-user" placeholder="Email" aria-label="Email" id="loginInputEmail">
@@ -53,7 +53,7 @@
         </div>
     </div>
     <nav class="navbar fixed-bottom navbar-light animated slideInUp" id="toolbar">
-        <span class="navbar-brand mb-0 h1 text-secondary">Toolbar</span>
+        <span class="navbar-brand mb-0 h1 text-secondary" data-primary="true">Toolbar</span>
         <a class="nav-item nav-link" href="#/rooms" data-primary="true">
             <i class="fa fa-th-large" aria-hidden="true"></i>
             Übersicht</a>
@@ -133,13 +133,49 @@
             </div>
         </div>
         <div id="reservations" class="text-white bg-very-dark"></div>
-        <div id="eventCreateForm">
-
-
-
-
-
-
+    </div>
+    <div id="template.createReservation">
+        <div id="createReservation">
+            <div class="modal formCreateRoom" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <i class="fa fa-clock-o text-primary" aria-hidden="true"></i>
+                                Neue Reservierung einreichen</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <span class="label labe-primary">$room.name</span>
+                                <br>
+                                <span class="text-muted">$room.location</span>
+                            </p>
+                            <div>
+                                <span>Wann brauchst du den Raum?</span>
+                                <div class="input-group addon">
+                                    <input class="form-control rangepicker" type="text" value="">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <p class="pt-2">
+                                <span>Anmerkungen?</span>
+                                <input class="form-control" type="text" id="crrLocation" maxlength="256">
+                            </p>
+                        </div>
+                        <div class="modal-body bg-danger py-3 hidden" id="crrWarn">
+                        <span class="text-white">
+                            Deine Eingaben sind unvollständig oder ungültig.<br>
+                            Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.
+                            Zudem musst du ein gültiges Datum auswählen.
+                        </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary clickable btnResCreate">Jetzt einreichen</button>
+                            <button type="button" class="btn btn-secondary clickable btnCreateCancel">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div id="template.reservation">
@@ -263,7 +299,7 @@
     </div>
     <div id="template.groupTC">Lehrer</div>
     <div id="template.groupSU">Administrator</div>
-    <div id="template.toolbarButton"><a class="nav-item nav-link" href="$href"><i class="fa $icon" aria-hidden="true"></i> $text</a></div>
+    <div id="template.toolbarButton"><a class="nav-item nav-link" href="$href" onclick="$onclick"><i class="fa $icon" aria-hidden="true"></i> $text</a></div>
 </section>
 
 <div id="snackbar"></div>
