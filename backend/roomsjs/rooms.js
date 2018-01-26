@@ -185,10 +185,19 @@ App.addons.RoomManager = {
     },
     requestNewReservation: function () {
 
+        var begin  = App.l.getElemById("rpfRange").value,
+            endApp = App.l.getElemById("rpfRange").value,
+            notes  = App.l.getElemById("rpfNotes").value,
+            errObj = App.l.getElemById("rpfWarn"); //instance
+
         // check if room free
         // send req
         // load room with this day as range
-        //
+
+        // BUT one-request only if possible
+
+
+
 
     }
 };

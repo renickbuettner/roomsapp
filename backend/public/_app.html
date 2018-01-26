@@ -152,17 +152,17 @@
                             </p>
                             <div>
                                 <span>Wann brauchst du den Raum?</span>
-                                <div class="input-group addon">
-                                    <input class="form-control rangepicker" type="text" value="">
+                                <div class="input-group addon rpGroup">
+                                    <input class="form-control rangepicker" id="rpfRange" type="text" value="">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                             <p class="pt-2">
                                 <span>Anmerkungen?</span>
-                                <input class="form-control" type="text" id="crrLocation" maxlength="256">
+                                <input class="form-control" type="text" id="rpfNotes" maxlength="256">
                             </p>
                         </div>
-                        <div class="modal-body bg-danger py-3 hidden" id="crrWarn">
+                        <div class="modal-body bg-danger py-3 hidden" id="rpfWarn">
                         <span class="text-white">
                             Deine Eingaben sind unvollständig oder ungültig.<br>
                             Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.

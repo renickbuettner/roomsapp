@@ -111,7 +111,16 @@ App.bridge = {
 
     removeRoom: function (room) {},
 
-    createReservation: function (reservation) {},
+    createReservation: function (reservation, callback) {
+        this.sendRequest("rooms",
+            this.TYPES.POST,
+            {
+                // ??
+
+            }, function (state, response) {
+                callback(state, response)
+            })
+    },
 
     updateReservation: function (reservation) {},
 

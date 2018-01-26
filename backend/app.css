@@ -145,6 +145,14 @@ body.login {
     color: #fff;
 }
 
+.rpGroup > input {
+    border-right: none;
+}
+
+.rpGroup > span {
+    border-left: none;
+}
+
 #rangepicker:active, #rangepicker:focus {
     background: #fff;
     color: #1b1e21;;
