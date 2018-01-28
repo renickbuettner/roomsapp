@@ -91,6 +91,28 @@ App.addons.RoomManager = {
                 App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
             }
         },
+        singleRoomByID: function (id) {
+            App.log("[Rooms] Called to Room #" + id);
+            if(App.cache._rooms[id] === undefined)
+            {
+                App.cache.lastOpenedRoom = null;
+                App.addons.snackbar.show(App.l.getTemplate("template.snackDoesntExist"))
+            }
+            else {
+                var room = App.cache._rooms[id];
+                App.cache.lastOpenedRoom = room;
+                App.l.loadView(
+                    new App.TView("SingleRoom", App.l.getTemplate("template.singleRoom"), {
+                        "\\$name": room.name,
+                        "\\$uuid": room.uuid,
+                        "\\$location": room.location
+                    })
+                );
+                App.addons.DateTimePicker.initSingleRoom();
+                var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
+                App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
+            }
+        },
         createReservation: function () {
             var ref = document.location.hash.split('/')[3];
             App.log("[Rooms] Create reservation for Room #" + ref);
@@ -109,8 +131,11 @@ App.addons.RoomManager = {
                 );
                 App.addons.DateTimePicker.initCreateReservation();
 
-                document.querySelector("#viewport .btnCancelCreate")
+                document.querySelector("#viewport .btnCreateCancel")
                     .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
+
+                document.querySelector("#viewport .btnSendForm")
+                    .addEventListener('click', App.addons.RoomManager.Actions.onFormSend, false);
             }
         }
     },
@@ -140,7 +165,44 @@ App.addons.RoomManager = {
             });
         },
         onFormLeave: function () {
-            App.addons.router.callBack(App.addons.RoomManager.ROUTES.rooms());
+            App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+        },
+        onFormSend: function () {
+            var datetime = document.querySelector("#viewport #rpfRange").value,
+                range = {
+                    hours: document.querySelector("#viewport #rpfHours").value,
+                    minutes: document.querySelector("#viewport #rpfMins").value
+                },
+                notes = document.querySelector("#viewport #rpfNotes").value,
+                errObj = App.l.getElemById("rpfWarn"),
+                timeFormat = "YYYY-MM-DD HH:ii",
+                begin = (
+                    moment(datetime, timeFormat)
+                        .unix()),
+                end = (
+                    moment(datetime, timeFormat)
+                        .add(range.hours, 'hours')
+                        .add(range.minutes, 'minutes')
+                        .unix()),
+                reservation = {
+                    "room": App.cache.lastOpenedRoom.uuid,
+                    "begin": begin,
+                    "end": end,
+                    "notes": notes
+                };
+
+            App.bridge.createReservation(reservation, function (state, response) {
+                if(state == 200){
+                    alert("Everything should be right");
+                    App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+                }
+                else if(state == 406) {
+                    App.addons.snackbar.show(App.l.getTemplate("template.snackRoomNotFree"));
+                } else {
+
+                }
+            });
+
         },
         loadReservations: function (room, begin, end) {
             App.bridge.getReservations(room, begin, end, function (state, response) {
@@ -182,23 +244,6 @@ App.addons.RoomManager = {
         else {
             elem.innerHTML = body;
         }
-    },
-    requestNewReservation: function () {
-
-        var begin  = App.l.getElemById("rpfRange").value,
-            endApp = App.l.getElemById("rpfRange").value,
-            notes  = App.l.getElemById("rpfNotes").value,
-            errObj = App.l.getElemById("rpfWarn"); //instance
-
-        // check if room free
-        // send req
-        // load room with this day as range
-
-        // BUT one-request only if possible
-
-
-
-
     }
 };
 

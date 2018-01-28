@@ -90,6 +90,8 @@ class Reservations
             $end    = floatval($_PUT["end"]);
             $isFree = $this->roomIsFree($f3, $params["ref"], $begin, $end);
 
+            var_dump($isFree);
+
             if ($isFree && $begin < $end)
             {
                 $res = new Reservation(
@@ -190,7 +192,7 @@ class Reservations
     private function roomIsFree($f3, $room, $begin, $end){
         try {
             $con = $f3->get("Database");
-            if($con->countReservations($room, $begin, $end)[0]["int"] != 0)
+            if($con->countReservations($room, $begin, $end)[0]["int"] > 0)
                 return false;
         } catch (\Exception $e){}
         return true;

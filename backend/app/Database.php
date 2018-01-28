@@ -212,10 +212,10 @@ class Database
     {
         try {
             return $this->db->exec(
-                "SELECT COUNT(*) as `int` FROM reservations WHERE `room` = :room AND `begin` <= :begin AND `end` >= :end ;",
+                "SELECT COUNT(*) as `int` FROM reservations WHERE `room` = :room AND `begin` < :e AND `end` > :b;",
                 [
-                    ":begin" => $begin,
-                    ":end" => $end,
+                    ":b" => $begin,
+                    ":e" => $end,
                     ":room" => $room
                 ]);
         } catch (\Exception $e){}

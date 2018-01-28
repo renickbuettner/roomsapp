@@ -100,39 +100,41 @@
         <h1 class="text-light">
             <i class="fa fa-square" aria-hidden="true"></i>
             $name
-            <div class="btn-group float-right" role="group">
-                <button class="btn btn-outline-secondary clickable" id="btnCtnEdt">
-                    <i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button class="btn btn-outline-secondary clickable" id="btnCtnDel">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <div class="input-group rangepicker-group">
+                <div class="input-group addon">
+                    <input class="form-control" type="text" id="rangepicker" value="">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
             </div>
         </h1>
         <h4 class="pb-2 text-secondary">
             <i class="fa fa-building" aria-hidden="true"></i>
             $location
         </h4>
-
-        <div class="input-group rangepicker-group">
-            <div class="input-group addon">
-                <input class="form-control" type="text" id="rangepicker" value="">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-            </div>
-        </div>
-
-        <div class="text-white">
-            <div class="row">
+        <div class="container-fluid text-secondary">
+            <div class="row no-gutters text-left py-4">
                 <div class="col">
-                    <div class="p-4">Zeit</div>
+                    <div class="">Zeit</div>
                 </div>
                 <div class="col">
-                    <div class="p-4">Kollege</div>
+                    <div class="">Kollege</div>
                 </div>
                 <div class="col">
-                    <div class="p-4">Anmerkung</div>
+                    <div class="">Anmerkung</div>
+                </div>
+                <div class="col su-only">
+                    Optionen
                 </div>
             </div>
         </div>
-        <div id="reservations" class="text-white bg-very-dark"></div>
+        <br>
+        <div id="reservations" class="container-fluid text-white bg-very-dark"></div>
+        <div class="btn-group float-right py-4" role="group">
+            <button class="btn btn-outline-secondary clickable" id="btnCtnEdt">
+                <i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button class="btn btn-outline-secondary clickable" id="btnCtnDel">
+                <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        </div>
     </div>
     <div id="template.createReservation">
         <div id="createReservation">
@@ -153,8 +155,16 @@
                             <div>
                                 <span>Wann brauchst du den Raum?</span>
                                 <div class="input-group addon rpGroup">
-                                    <input class="form-control rangepicker" id="rpfRange" type="text" value="">
+                                    <input class="form-control rangepicker" id="rpfRange" type="text" value="" required>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Wie lange benötigst du den Raum?</span>
+                                <div class="input-group addon rpGroup">
+                                    <input class="form-control" id="rpfHours" type="number" maxlength="1" minlength="1" value="1" min="0" max="23" required>
+                                    <input class="form-control" id="rpfMins" type="number" maxlength="2" minlength="1" value="20" min="0" max="59" required>
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                 </div>
                             </div>
                             <p class="pt-2">
@@ -170,7 +180,7 @@
                         </span>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary clickable btnResCreate">Jetzt einreichen</button>
+                            <button type="button" class="btn btn-outline-primary clickable btnSendForm">Jetzt einreichen</button>
                             <button type="button" class="btn btn-secondary clickable btnCreateCancel">Abbrechen</button>
                         </div>
                     </div>
@@ -179,15 +189,20 @@
         </div>
     </div>
     <div id="template.reservation">
-        <div class="row">
-            <div class="col">
-                <div class="p-4">$begin - $end Uhr</div>
+        <div class="row no-gutters text-left">
+            <div class="col py-3">
+                $begin - $end Uhr
             </div>
-            <div class="col">
-                <div class="p-4">$username</div>
+            <div class="col py-3">
+                $username
             </div>
-            <div class="col">
-                <div class="p-4">$notes</div>
+            <div class="col py-3">
+                $notes
+            </div>
+            <div class="col py-3 su-only">
+                <a href="#" class="text-danger">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i> Löschen
+                </a>
             </div>
         </div>
     </div>
@@ -225,6 +240,7 @@
     <div id="template.snackLoginFailed"><span class="text-danger">Du konntest nicht eingeloggt werden. Überprüfe deine Eingaben.</span></div>
     <div id="template.snackConFailed"><span class="text-danger">Verbindung fehlgeschlagen.</span></div>
     <div id="template.snackRoomCreated"><span class="text-success">Ein Raum wurde angelegt!</span></div>
+    <div id="template.snackRoomNotFree"><span class="text-danger">Der Raum ist in der gewählen Zeitspanne bereits belegt!</span></div>
     <div id="template.snackUserCreated"><span class="text-success">Ein Benutzer wurde angelegt!</span></div>
     <div id="template.snackDoesntExist"><span class="text-danger">Das Objekt existiert nicht.</span></div>
     <div id="template.createRoom">

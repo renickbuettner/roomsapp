@@ -19,7 +19,9 @@ App.addons.DateTimePicker = {
 
     initCreateReservation: function () {
         flatpickr(document.querySelector("#viewport .rangepicker"), {
-            dateFormat: "d.m.Y",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            time_24hr: "true",
             maxDate: new Date().fp_incr(365),
             minDate: "today",
             "disable": [
