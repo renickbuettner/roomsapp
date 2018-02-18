@@ -188,6 +188,58 @@
             </div>
         </div>
     </div>
+    <div id="template.updateReservation">
+        <div id="updateReservation">
+            <div class="modal formCreateRoom" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                <i class="fa fa-clock-o text-primary" aria-hidden="true"></i>
+                                Reservierung ändern</h5>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <span class="label labe-primary">$room.name</span>
+                                <br>
+                                <span class="text-muted">$room.location</span>
+                            </p>
+                            <div>
+                                <span>Wann wird der Raum benötigt?</span>
+                                <div class="input-group addon rpGroup">
+                                    <input class="form-control rangepicker" id="rpfRange" type="text" value="" required>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Und wie lange?</span>
+                                <div class="input-group addon rpGroup">
+                                    <input class="form-control" id="rpfHours" type="number" maxlength="1" minlength="1" value="1" min="0" max="23" required>
+                                    <input class="form-control" id="rpfMins" type="number" maxlength="2" minlength="1" value="20" min="0" max="59" required>
+                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                </div>
+                            </div>
+                            <p class="pt-2">
+                                <span>Anmerkungen?</span>
+                                <input class="form-control" type="text" id="rpfNotes" maxlength="256">
+                            </p>
+                        </div>
+                        <div class="modal-body bg-danger py-3 hidden" id="rpfWarn">
+                        <span class="text-white">
+                            Deine Eingaben sind unvollständig oder ungültig.<br>
+                            Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.
+                            Zudem musst du ein gültiges Datum auswählen.
+                        </span>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary clickable btnSendForm">Jetzt aktualisieren</button>
+                            <button type="button" class="btn btn-secondary clickable btnCreateCancel">Abbrechen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="template.reservation">
         <div class="row no-gutters text-left">
             <div class="col py-3">
@@ -202,6 +254,9 @@
             <div class="col py-3 su-only">
                 <a href="#" class="text-danger">
                     <i class="fa fa-trash-o" aria-hidden="true"></i> Löschen
+                </a>
+                <a href="#" onclick="App.addons.RoomManager.UI.updateReservation($uuid)" class="text-danger ml-2">
+                    <i class="fa fa-wrench" aria-hidden="true"></i> Update
                 </a>
             </div>
         </div>

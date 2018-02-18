@@ -137,6 +137,21 @@ App.addons.RoomManager = {
                 document.querySelector("#viewport .btnSendForm")
                     .addEventListener('click', App.addons.RoomManager.Actions.onFormSend, false);
             }
+        },
+        updateReservation: function (id) {
+
+            alert(id);
+
+
+
+
+            //App.addons.DateTimePicker.initCreateReservation();
+
+            //document.querySelector("#viewport .btnCreateCancel")
+            //    .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
+
+            //document.querySelector("#viewport .btnSendForm")
+            //    .addEventListener('click', App.addons.RoomManager.Actions.onUpdateReservation, false);
         }
     },
     Actions: {
@@ -244,6 +259,9 @@ App.addons.RoomManager = {
         else {
             elem.innerHTML = body;
         }
+    },
+    onUpdateReservation: function () {
+        // non ui code ... here ...
     }
 };
 
@@ -277,7 +295,7 @@ App.TReservation = function (uuid, user, room, notes, begin, end) {
 App.TReservation.prototype = {
     getView: function () {
         return new App.TView(this.name, App.l.getTemplate("template.reservation"), {
-            "\\$uuid": this.name,
+            "\\$uuid": this.uuid,
             "\\$username": this.user,
             "\\$roomname": this.room.name,
             "\\$notes": this.notes,
@@ -301,3 +319,4 @@ App.events.RoomManager = new App.TEvent("RoomManager", function () {
        App.addons.RoomManager.UI.createRoom()
     });
 });
+
