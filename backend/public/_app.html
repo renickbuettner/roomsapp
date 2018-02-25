@@ -67,7 +67,7 @@
     </nav>
 </section>
 
-<section class="screen">
+<section class="screen" data-lang="de">
     <div id="template.room">
         <a href="$href" class="room p-3 goToRoom">
             <div class="card bg-secondary" style="width: 20rem;">
@@ -130,7 +130,7 @@
         <br>
         <div id="reservations" class="container-fluid text-white bg-very-dark"></div>
         <div class="btn-group float-right py-4" role="group">
-            <button class="btn btn-outline-secondary clickable" id="btnCtnEdt">
+            <button class="btn btn-outline-secondary clickable" id="btnCtnEdit">
                 <i class="fa fa-pencil" aria-hidden="true"></i></button>
             <button class="btn btn-outline-secondary clickable" id="btnCtnDel">
                 <i class="fa fa-trash-o" aria-hidden="true"></i></button>
@@ -295,6 +295,9 @@
     <div id="template.snackLoginFailed"><span class="text-danger">Du konntest nicht eingeloggt werden. Überprüfe deine Eingaben.</span></div>
     <div id="template.snackConFailed"><span class="text-danger">Verbindung fehlgeschlagen.</span></div>
     <div id="template.snackRoomCreated"><span class="text-success">Ein Raum wurde angelegt!</span></div>
+    <div id="template.snackReservationCreated"><span class="text-success">Die Reservierung ist erstellt!</span></div>
+    <div id="template.snackRoomEdited"><span class="text-success">Die Aktualisierung ist vorgenommen!</span></div>
+    <div id="template.snackRoomDeleted"><span class="text-success">Der Raum wurde gelöscht!</span></div>
     <div id="template.snackRoomNotFree"><span class="text-danger">Der Raum ist in der gewählen Zeitspanne bereits belegt!</span></div>
     <div id="template.snackUserCreated"><span class="text-success">Ein Benutzer wurde angelegt!</span></div>
     <div id="template.snackDoesntExist"><span class="text-danger">Das Objekt existiert nicht.</span></div>
@@ -326,6 +329,69 @@
                     <div class="modal-footer">
                         <button id="btnRoomCreate" type="button" class="btn btn-outline-primary clickable btnRoomCreate">Raum anlegen</button>
                         <button id="btnRoomCreateCancel" type="button" class="btn btn-secondary clickable">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="template.editRoom">
+        <div class="modal formEditRoom" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa fa-location-arrow text-primary" aria-hidden="true"></i>
+                            Raum bearbeiten</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <span>Wie heißt der Raum?</span>
+                            <input class="form-control" type="text" id="criName" minlength="4" maxlength="64" value="$name">
+                        </p>
+                        <p class="pt-2">
+                            <span>Wo bedindet sich der Raum?</span>
+                            <input class="form-control" type="text" id="criLocation" minlength="4" maxlength="64" value="$location">
+                        </p>
+                    </div>
+                    <div class="modal-body bg-danger py-3 hidden" id="criWarn">
+                        <span class="text-white">
+                            Deine Eingaben sind unvollständig oder ungültig.<br>
+                            Bitte beachte, dass diese mindestens 4 und maximal 64 Zeichen lang sein dürfen.
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnRoomEdit" type="button" class="btn btn-outline-primary clickable btnRoomEdit">Raum aktualisieren</button>
+                        <button id="btnRoomEditCancel" type="button" class="btn btn-secondary clickable">Abbrechen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="template.deleteRoom">
+        <div class="modal formDeleteRoom" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa fa-location-arrow text-primary" aria-hidden="true"></i>
+                            Raum entgültig löschen</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center">
+                            <h3>$name</h3>
+                            <span class="text-secondary">$location</span>
+                        </p>
+                    </div>
+                    <div class="modal-body bg-danger py-3">
+                        <span class="text-white">
+                            Diese Aktion kann nicht widerrufen werden!<br>
+                            Alle Reservierungen, die diesen Raum betreffen,
+                            verfallen logischerweise ebenfalls.
+                        </span>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnRoomDelete" type="button" class="btn btn-outline-danger clickable btnRoomDelete">Raum löschen</button>
+                        <button id="btnRoomDeleteCancel" type="button" class="btn btn-success clickable">Abbrechen</button>
                     </div>
                 </div>
             </div>

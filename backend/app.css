@@ -185,6 +185,8 @@ body.login {
  */
 
 .formCreateUser,
+.formEditRoom,
+.formDeleteRoom,
 .formCreateRoom {
     display: block;
     position: relative;

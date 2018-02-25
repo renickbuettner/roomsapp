@@ -107,9 +107,24 @@ App.bridge = {
             })
     },
 
-    updateRoom: function (room) {},
+    updateRoom: function (room, callback) {
+        this.sendRequest("rooms/" + room.uuid,
+            this.TYPES.PUT,
+            {
+                name: room.name,
+                location: room.location
+            }, function (state, response) {
+                callback(state, response)
+            })
+    },
 
-    removeRoom: function (room) {},
+    removeRoom: function (room, callback) {
+        this.sendRequest("rooms/" + room.uuid,
+            this.TYPES.DELETE,
+            {}, function (state, response) {
+                callback(state, response)
+            })
+    },
 
     createReservation: function (reservation, callback) {
         this.sendRequest("rooms/" + reservation.room + "/reservations",

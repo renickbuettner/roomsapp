@@ -86,9 +86,7 @@ App.addons.RoomManager = {
                         "\\$location": room.location
                     })
                 );
-                App.addons.DateTimePicker.initSingleRoom();
-                var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
-                App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
+                App.addons.RoomManager.Utils.singleRoomUtils()
             }
         },
         singleRoomByID: function (id) {
@@ -108,9 +106,7 @@ App.addons.RoomManager = {
                         "\\$location": room.location
                     })
                 );
-                App.addons.DateTimePicker.initSingleRoom();
-                var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
-                App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
+                App.addons.RoomManager.Utils.singleRoomUtils()
             }
         },
         createReservation: function () {
@@ -208,8 +204,8 @@ App.addons.RoomManager = {
 
             App.bridge.createReservation(reservation, function (state, response) {
                 if(state == 200){
-                    alert("Everything should be right");
                     App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+                    App.addons.snackbar.show(App.l.getTemplate("template.snackReservationCreated"));
                 }
                 else if(state == 406) {
                     App.addons.snackbar.show(App.l.getTemplate("template.snackRoomNotFree"));
@@ -242,6 +238,62 @@ App.addons.RoomManager = {
                     App.addons.snackbar.show(App.l.getTemplate("template.snackConFailed"));
                 }
             });
+        },
+        mayDeleteRoom: function () {
+            var room = App.cache.lastOpenedRoom;
+            App.l.loadView(
+                new App.TView("deleteRoom", App.l.getTemplate("template.deleteRoom"), {
+                    "\\$name": room.name,
+                    "\\$uuid": room.uuid,
+                    "\\$location": room.location
+                })
+            );
+            document.querySelector("#viewport #btnRoomDelete")
+                .addEventListener('click', function () {
+                    App.bridge.removeRoom(App.cache.lastOpenedRoom, function (state, response) {
+                        App.l.loadScreen("screen.dashboard");
+                        App.addons.snackbar.show(App.l.getTemplate("template.snackRoomDeleted"))
+                    })
+                }, false);
+            document.querySelector("#viewport #btnRoomDeleteCancel")
+                .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
+        },
+        mayEditRoom: function () {
+            var room = App.cache.lastOpenedRoom;
+            App.l.loadView(
+                new App.TView("editRoom", App.l.getTemplate("template.editRoom"), {
+                    "\\$name": room.name,
+                    "\\$uuid": room.uuid,
+                    "\\$location": room.location
+                })
+            );
+            document.querySelector("#viewport #btnRoomEdit")
+                .addEventListener('click', function () {
+                    var name = document.querySelector("#viewport #criName").value, 
+                        location = document.querySelector("#viewport #criLocation").value, 
+                        uuid = App.cache.lastOpenedRoom.uuid,
+                        room = new App.TRoom(uuid, name, location, null);
+                    
+                    if(room.name.length < 4 || room.location.length < 4){
+                        document.querySelector("#viewport #criWarn").classList.remove("hidden");
+                        return;
+                    }
+
+                    App.bridge.updateRoom(room, function (state, response) {
+                        if(state == 200){
+                            App.cache._rooms[response[0].uuid].name = response[0].name;
+                            App.cache._rooms[response[0].uuid].location = response[0].location;
+                            App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+                            App.addons.snackbar.show(App.l.getTemplate("template.snackRoomEdited"));
+                        } else {
+                            App.addons.snackbar.show(App.l.getTemplate("template.snackConFailed"));
+                        }
+                    })
+                    
+                }, false);
+
+            document.querySelector("#viewport #btnRoomEditCancel")
+                .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
         }
     },
     getCurrentRoom: function () {
@@ -262,6 +314,18 @@ App.addons.RoomManager = {
     },
     onUpdateReservation: function () {
         // non ui code ... here ...
+    },
+    Utils: {
+        singleRoomUtils: function () {
+            App.addons.DateTimePicker.initSingleRoom();
+            var btnCreate = App.addons.RoomManager.UI.BUTTONS.createReservation();
+            App.addons.Toolbar.registerButton(btnCreate).showButton(btnCreate.name);
+
+            document.querySelector("#viewport #btnCtnEdit")
+                .addEventListener("click", App.addons.RoomManager.Actions.mayEditRoom, false);
+            document.querySelector("#viewport #btnCtnDel")
+                .addEventListener("click", App.addons.RoomManager.Actions.mayDeleteRoom, false);
+        }
     }
 };
 
