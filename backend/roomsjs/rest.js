@@ -140,7 +140,13 @@ App.bridge = {
 
     updateReservation: function (reservation) {},
 
-    removeReservation: function (reservation) {},
+    removeReservation: function (id, callback) {
+        this.sendRequest("reservations/" + id,
+            this.TYPES.DELETE,
+            {}, function (state, response) {
+                callback(state, response)
+            })
+    },
 
     getUsers: function (callback) {
         this.sendRequest("users",
@@ -151,7 +157,9 @@ App.bridge = {
             })
     },
 
-    createUser: function (user) {},
+    createUser: function (user) {
+
+    },
 
     updateUser: function (user) {},
 

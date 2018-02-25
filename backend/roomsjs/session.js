@@ -19,6 +19,7 @@ App.addons.session = {
     setup: function (user) {
         App.cache.user = new App.TUser(
             user.uuid, user.name, user.email, user.group);
+        // IF USPER USER THEN DO STOMEHTING HERE
         App.l.loadScreen("screen.dashboard");
     },
     remove: function () {
@@ -31,3 +32,7 @@ App.addons.session = {
 App.events["session"] = new App.TEvent("session", function () {
     App.addons.session.alreadyCreated();
 });
+
+App.l.isSU = function () {
+  return true; //return App.cache._isSU;
+};

@@ -191,3 +191,7 @@ body.login {
     display: block;
     position: relative;
 }
+
+/* Perms */
+
+.su-only { display: none }

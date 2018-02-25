@@ -56,7 +56,11 @@ App.addons.UserManager = {
                        new App.TView("Users", App.l.getTemplate("template.userContainer"), {
                            "\\$users": body
                        })
-                   )
+                   );
+
+                   document.querySelector("#viewport #btnContAction")
+                       .addEventListener("click", App.addons.UserManager.UI.createUser, false);
+
                }
                else {
                     App.addons.snackbar.show(App.l.getTemplate("template.snackConFailed"));
@@ -80,29 +84,18 @@ App.addons.UserManager = {
     Actions: {
         onUserCreate: function () {
             App.log("[Rooms] Room creation requested.");
-            var user = new App.TRoom(
+            var user = new App.TUser(
                 null,
-                document.querySelector("#viewport #criName").value,
-                document.querySelector("#viewport #criEmail").value,
-                null);
+                document.querySelector("#viewport #cuName").value,
+                document.querySelector("#viewport #cuEmail").value,
+                document.querySelector("#viewport #cuSU").value);
 
-            user.passwd = document.querySelector("#viewport #criPwd").value;
+            user.passwd = document.querySelector("#viewport #cuPwd").value;
 
-            if(user.name.length < 4 || user.location.length < 4){
+            if(user.name.length < 4 || user.email.length < 6){
                 document.querySelector("#viewport #cuWarn").classList.remove("hidden");
                 return;
             }
-
-            // App.bridge.createRoom(room, function (state, response) {
-            //     if(state == 200)
-            //     {
-            //         App.addons.RoomManager.Actions.onFormLeave();
-            //         App.addons.snackbar.show(App.l.getTemplate("template.snackRoomCreated"));
-            //     }
-            //     else {
-            //         App.addons.snackbar.show(App.l.getTemplate("template.snackConFailed"));
-            //     }
-            // });
 
             App.bridge.createUser(user, function (state, response) {
                if(state == 200)

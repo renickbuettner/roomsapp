@@ -188,7 +188,7 @@
             </div>
         </div>
     </div>
-    <div id="template.updateReservation">
+    <div id="template.editReservation">
         <div id="updateReservation">
             <div class="modal formCreateRoom" tabindex="-1">
                 <div class="modal-dialog">
@@ -252,12 +252,12 @@
                 $notes
             </div>
             <div class="col py-3 su-only">
-                <a href="#" class="text-danger">
+                <a href="#" onclick="javascript:App.addons.RoomManager.Actions.deleteReservation($uuid)" class="text-danger">
                     <i class="fa fa-trash-o" aria-hidden="true"></i> Löschen
                 </a>
-                <a href="#" onclick="App.addons.RoomManager.UI.updateReservation($uuid)" class="text-danger ml-2">
+                <!--<a href="#" onclick="javascript:App.addons.RoomManager.UI.updateReservation($uuid)" class="text-danger ml-2">
                     <i class="fa fa-wrench" aria-hidden="true"></i> Update
-                </a>
+                </a>-->
             </div>
         </div>
     </div>
@@ -298,6 +298,7 @@
     <div id="template.snackReservationCreated"><span class="text-success">Die Reservierung ist erstellt!</span></div>
     <div id="template.snackRoomEdited"><span class="text-success">Die Aktualisierung ist vorgenommen!</span></div>
     <div id="template.snackRoomDeleted"><span class="text-success">Der Raum wurde gelöscht!</span></div>
+    <div id="template.snackEntryDeleted"><span class="text-success">Der Eintrag ist gelöscht!</span></div>
     <div id="template.snackRoomNotFree"><span class="text-danger">Der Raum ist in der gewählen Zeitspanne bereits belegt!</span></div>
     <div id="template.snackUserCreated"><span class="text-success">Ein Benutzer wurde angelegt!</span></div>
     <div id="template.snackDoesntExist"><span class="text-danger">Das Objekt existiert nicht.</span></div>
@@ -414,6 +415,11 @@
                         <p class="pt-2">
                             <span>Wie ist die E-Mail-Adresse des Benutzers?</span>
                             <input class="form-control" type="text" id="cuEmail" minlength="4" maxlength="64">
+                        </p>
+                        <p class="pt-2">
+                            <label>
+                                <input type="checkbox" id="cuSU"> Benutzer soll administrative Rechte bekommen?
+                            </label>
                         </p>
                         <p class="pt-2">
                             <span>Welches Passwort soll der Benutzer haben?</span>

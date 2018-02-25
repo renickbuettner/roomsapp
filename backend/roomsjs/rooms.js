@@ -136,10 +136,15 @@ App.addons.RoomManager = {
         },
         updateReservation: function (id) {
 
-            alert(id);
-
-
-
+            // var room = App.cache.lastOpenedRoom;
+            //
+            // App.l.loadView(
+            //     new App.TView("EditReservation", App.l.getTemplate("template.editReservation"), {
+            //         "\\$room.name": room.name,
+            //         "\\$room.uuid": room.uuid,
+            //         "\\$room.location": room.location
+            //    })
+            //);
 
             //App.addons.DateTimePicker.initCreateReservation();
 
@@ -222,7 +227,7 @@ App.addons.RoomManager = {
                     var body = "";
                     for(var i=0; i < response.length; i++)
                     {
-                        body += (
+                        var pre = (
                             new App.TReservation(
                                 response[i].uuid,
                                 response[i].user,
@@ -230,7 +235,14 @@ App.addons.RoomManager = {
                                 response[i].notes,
                                 response[i].begin,
                                 response[i].end
-                            ).getView().html())
+                            ).getView().html());
+
+
+                        if(App.l.isSU() || response[i].user == App.cache.user.name){
+                            body += pre.replace(new RegExp('su-only', 'gi'), '');
+                        } else {
+                            body += pre;
+                        }
                     }
                     App.addons.RoomManager.putReservationsOnScreen(body);
                 }
@@ -294,6 +306,12 @@ App.addons.RoomManager = {
 
             document.querySelector("#viewport #btnRoomEditCancel")
                 .addEventListener('click', App.addons.RoomManager.Actions.onFormLeave, false);
+        },
+        deleteReservation: function (id) {
+            App.bridge.removeReservation(id, function () {
+                App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+                App.addons.snackbar.show(App.l.getTemplate("template.snackEntryDeleted"))
+            })
         }
     },
     getCurrentRoom: function () {
