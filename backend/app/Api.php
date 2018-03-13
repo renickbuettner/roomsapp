@@ -42,6 +42,7 @@ class Api
         $f3->route('DELETE /users/@ref', 'renickbuettner\App\Users->deleteUser');
         $f3->route('DELETE /session', 'renickbuettner\App\Session->delete');
 
+        $f3->route('GET /bridge/d', 'renickbuettner\App\DesktopClient->get');
         $f3->route('GET /statistics', 'renickbuettner\App\Statistics->get');
     }
 }
