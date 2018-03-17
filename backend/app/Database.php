@@ -221,4 +221,15 @@ class Database
         } catch (\Exception $e){}
     }
 
+    public function getReservationsForClient($key, $val)
+    {
+        try {
+            return $this->db->exec(
+                "SELECT `id`, `notes`, `begin`, `end`, (SELECT `name` FROM `users` WHERE `id` = reservations.user) as `name` FROM reservations WHERE `".$key."`= :val;",
+                ["val" => $val]);
+        } catch (\Exception $e){
+            return null;
+        }
+    }
+
 }

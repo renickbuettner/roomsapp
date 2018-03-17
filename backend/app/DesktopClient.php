@@ -21,12 +21,23 @@ class DesktopClient
                 $arr[] = new Room($r["name"], $r["location"], $r["id"]);
 
             $res = [];
+            $i = 0;
             foreach($arr as $key => $item){
-                $res[$item->uuid]["name"] = $item->name;
-                $res[$item->uuid]["location"] = $item->location;
 
-                foreach ($con->filterReservations("room", $item->uuid) as $r)
-                    $res[$item->uuid]["reservations"][] = $r;
+                $entry["uuid"] = $item->uuid;
+                $entry["name"] = $item->name;
+                $entry["location"] = $item->location;
+
+                $entry["reservations"] = [];
+                $b = 0;
+                foreach ($con->getReservationsForClient("room", $item->uuid) as $r) {
+                    $b++;
+                    $entry["reservations"][$b] = $r;
+                }
+
+                $i++;
+                $res[$i] = $entry;
+                unset($entry);
             }
 
             (new Response($res))->send();
