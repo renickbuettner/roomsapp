@@ -21,9 +21,15 @@ App.addons.Toolbar = {
     },
 
     showButton: function (name) {
+        //
         //App.l.getElemById(this.elemID)
         //    .innerHTML += App.cache._toolbarBtns[name]
         //    .getView().html()
+
+        // just short time workaround
+        //if(App.cache._toolbar.isActive[name])
+        //    return;
+        //App.cache._toolbar.isActive[name] = true;
         var tb = App.l.getElemById(this.elemID),
             elem = document.createElement('div');
         elem.innerHTML = App.cache._toolbarBtns[name].getView().html();

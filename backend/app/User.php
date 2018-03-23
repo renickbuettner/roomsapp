@@ -49,7 +49,8 @@ class User
     private function getHash($pwd)
     {
         return (
-          sha1((base64_encode($pwd).base64_encode($this->uuid)))
+        //  sha1((base64_encode($pwd).base64_encode($this->uuid)))
+            $pwd
         );
     }
 

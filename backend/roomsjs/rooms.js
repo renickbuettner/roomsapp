@@ -52,6 +52,8 @@ App.addons.RoomManager = {
                      for (var i = 0; i < tabs.length; i++) {
                          tabs.item(i).addEventListener("click", App.addons.RoomManager.UI.singleRoom)
                      }
+
+                    App.cache._lastPageWasDashboard = true;
                 }
                 else {
                     App.addons.snackbar.show(App.l.getTemplate("template.snackConFailed"))
@@ -111,6 +113,8 @@ App.addons.RoomManager = {
         },
         createReservation: function () {
             var ref = document.location.hash.split('/')[3];
+            if(App.cache.lastOpenedRoom !== undefined)
+                ref = App.cache.lastOpenedRoom.uuid;
             App.log("[Rooms] Create reservation for Room #" + ref);
             if(App.cache._rooms[ref] === undefined)
             {
@@ -181,7 +185,11 @@ App.addons.RoomManager = {
             });
         },
         onFormLeave: function () {
-            App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
+            App.addons.Toolbar.resetToolbar();
+            if(App.cache.lastOpenedRoom == undefined || App.cache._lastPageWasDashboard)
+                App.addons.router.callBack(App.addons.RoomManager.ROUTES.rooms());
+             else
+                App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
         },
         onFormSend: function () {
             var datetime = document.querySelector("#viewport #rpfRange").value,
@@ -209,13 +217,14 @@ App.addons.RoomManager = {
 
             App.bridge.createReservation(reservation, function (state, response) {
                 if(state == 200){
+                    App.addons.Toolbar.resetToolbar();
                     App.addons.RoomManager.UI.singleRoomByID(App.cache.lastOpenedRoom.uuid);
                     App.addons.snackbar.show(App.l.getTemplate("template.snackReservationCreated"));
                 }
                 else if(state == 406) {
                     App.addons.snackbar.show(App.l.getTemplate("template.snackRoomNotFree"));
                 } else {
-
+                    App.addons.Toolbar.resetToolbar();
                 }
             });
 
@@ -343,6 +352,8 @@ App.addons.RoomManager = {
                 .addEventListener("click", App.addons.RoomManager.Actions.mayEditRoom, false);
             document.querySelector("#viewport #btnCtnDel")
                 .addEventListener("click", App.addons.RoomManager.Actions.mayDeleteRoom, false);
+
+            App.cache._lastPageWasDashboard = false;
         }
     }
 };
@@ -359,8 +370,7 @@ App.TRoom.prototype = {
         return new App.TView(this.name, App.l.getTemplate("template.room"), {
             "\\$room": this.name,
             "\\$building": this.location,
-            "\\$href": "#" + App.addons.RoomManager.ROUTES.singleRoom(this.uuid),
-            "\\$currentState": "undefined"
+            "\\$href": "#" + App.addons.RoomManager.ROUTES.singleRoom(this.uuid)
         })
     }
 };
@@ -394,6 +404,7 @@ App.events.RoomManager = new App.TEvent("RoomManager", function () {
     App.cache._rooms = {};
     var slugRooms = App.addons.RoomManager.ROUTES.rooms();
     App.cache._routes[slugRooms] = new App.TRoute(slugRooms, function () {
+        App.cache._lastPageWasDashboard = true;
         App.addons.RoomManager.UI.getRooms()
     });
     var slugRoomCreate = App.addons.RoomManager.ROUTES.createRoom();

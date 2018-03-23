@@ -19,7 +19,12 @@ App.addons.session = {
     setup: function (user) {
         App.cache.user = new App.TUser(
             user.uuid, user.name, user.email, user.group);
-        // IF USPER USER THEN DO STOMEHTING HERE
+
+        if(user.group > 50)
+            App.cache._isSU = true;
+                else
+                    App.cache._isSU = false;
+
         App.l.loadScreen("screen.dashboard");
     },
     remove: function () {
@@ -34,5 +39,5 @@ App.events["session"] = new App.TEvent("session", function () {
 });
 
 App.l.isSU = function () {
-  return true; //return App.cache._isSU;
+  return App.cache._isSU;
 };

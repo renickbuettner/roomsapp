@@ -136,6 +136,20 @@ body.login {
     display: inline;
 }
 
+.room .card-header, .room .list-group {
+    background-color: rgba(255, 255, 255, 0.81);
+}
+
+.card-room ul {
+    background-image: url("/ui/img/00-02.png");
+    background-repeat: no-repeat;
+    background-position: -10% 300%;
+}
+
+.card-room ul li {
+    background: transparent;
+}
+
 .rangepicker-group {
     background: rgba(255,255,255, 0.3);
     width: 150px;
@@ -190,6 +204,10 @@ body.login {
 .formCreateRoom {
     display: block;
     position: relative;
+}
+
+.form-ui-btn {
+    padding: .1rem .5rem;
 }
 
 /* Perms */
