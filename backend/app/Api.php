@@ -12,6 +12,13 @@ namespace renickbuettner\App;
 class Api
 {
 
+    /**
+     * Api constructor.
+     * @param $f3
+     * Alle Routen initialisieren
+     * und die entsprechenden Funktionen verbinden.
+     * REST-konform.
+     */
     public function __construct($f3)
     {
         $f3->route('GET /', 'renickbuettner\App\Frontend::get');

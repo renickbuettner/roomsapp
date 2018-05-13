@@ -1,5 +1,6 @@
 <?php
 /**
+ * Kommunikationsobjekt: Room
  * Created by PhpStorm.
  * User: renickbuettner
  * Date: 06.01.18
@@ -18,6 +19,15 @@ class Room
 
     private $reservations;
 
+    /**
+     * Room constructor.
+     * @param $name
+     * @param $location
+     * @param null $uuid
+     * Erstellt eine neue Instanz,
+     * ist die UUID null, wird beim speichern
+     * per Zufallsgenerator eine erstellt.
+     */
     public function __construct($name, $location, $uuid = null)
     {
         $this->uuid = $uuid;
@@ -25,6 +35,13 @@ class Room
         $this->location = $location;
     }
 
+    /**
+     * @param $f3
+     * Speichert das Objekt über die globale Instanz
+     * des Frameworks in der Datenbank.
+     * Dabei wird mit der Datenbank-Abstraktions-Layer
+     * gearbeitet.
+     */
     public function save($f3)
     {
         try {
@@ -36,6 +53,13 @@ class Room
         } catch (\Exception $e){}
     }
 
+    /**
+     * @param $f3
+     * Entfernt über die globale Instanz des
+     * Frameworks einen Raum aus der Datenbank.
+     * Dabei wird mit der Datenbank-Abstraktions-Layer
+     * gearbeitet.
+     */
     public function remove($f3)
     {
         try {
@@ -44,6 +68,12 @@ class Room
         } catch (\Exception $e){}
     }
 
+    /**
+     * @return array
+     * Wandelt die Klasse in ein Array um,
+     * welches weitergegeben werden kann.
+     * Aufbau orientiert sich am Kommunikationsobjekt.
+     */
     public function toArray()
     {
         return [
